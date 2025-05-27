@@ -1,26 +1,22 @@
-# Use the ASP.NET runtime image for the final container
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
-# Use the .NET SDK image for building the app
+# Use the official .NET SDK image for building
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# Copy the csproj and restore as separate layers
-COPY ["Certitrack/Certitrack.csproj", "Certitrack/"]
-RUN dotnet restore "Certitrack/Certitrack.csproj"
+# Copy the csproj and restore dependencies
+COPY ["Certitrack.csproj", "."]
+RUN dotnet restore "Certitrack.csproj"
 
-# Copy the rest of the source code
+# Copy everything else and build
 COPY . .
-WORKDIR "/src/Certitrack"
-
-# Build and publish the app
 RUN dotnet publish "Certitrack.csproj" -c Release -o /app/publish
 
-# Build runtime image
-FROM base AS final
+# Use ASP.NET runtime image for final build
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
+
+# Expose the default port
+EXPOSE 80
+
+# Set entrypoint
 ENTRYPOINT ["dotnet", "Certitrack.dll"]
