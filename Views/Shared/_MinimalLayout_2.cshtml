@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Certitrack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+    <!-- App CSS -->
+    <link href="~/assets1/css/default/app.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <!-- Bootstrap CSS (optional if not in app.min.css) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div id="page-container" class="fade">
+        <div id="header" class="header navbar-default">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand"><span class="navbar-logo"></span> <b>Certi</b>track</a>
+            </div>
+        </div>
+
+        <div class="content" style="padding: 30px;">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Scripts in correct order -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJ++6AjC2H/0+YoGkUFlF3GJ1zKk4Y1DtsL6g="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+Pj2Kn4t6aq82c4fF5P0iTZvNQ5Er"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- App JS (optional) -->
+    <script src="~/assets1/js/app.min.js" asp-append-version="true"></script>
+    <script src="~/assets1/js/theme/default.min.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,180 @@
+﻿@model Certitrack.ViewModels.CompleteRegistrationVM
+
+@{
+    Layout = "_MinimalLayout";
+    //Layout = "_MenuLayout";
+    ViewData["Title"] = "Complete Registration";
+}
+
+<div id="content" class="content">
+    <h1 class="page-header text-center mb-4">Complete Your Registration</h1>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        User Details
+                    </div>
+                    <div class="card-body">
+                       
+                         <form asp-action="CompleteRegistration" method="post" novalidate>
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="Email" />
+                            <input type="hidden" asp-for="RoleId" />
+                            <input type="hidden" asp-for="Token" />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label>Title</label>
+                                      @*   <select asp-for="Title" class="form-control" asp-items='new SelectList(ViewBag.Titles, "Id", "Name")'>
+                                            <option value="">-- Select Title --</option>
+                                        </select>  *@
+                                        <select asp-for="Title" class="form-control" asp-items="ViewBag.Titles">
+                                            <option value="0">-- Select Title --</option>
+                                        </select>
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="FirstName"></label>
+                                        <input asp-for="FirstName" class="form-control" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="LastName"></label>
+                                        <input asp-for="LastName" class="form-control" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Phone"></label>
+                                        <input asp-for="Phone" class="form-control" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Address"></label>
+                                        <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" class="form-control" type="password" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="ConfirmPassword"></label>
+                                        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="disclaimerCheck" disabled />
+                                <label class="form-check-label" for="disclaimerCheck">
+                                    I have read and accepted the disclaimer.
+                                </label>
+                                <span id="disclaimerError" class="text-danger d-none">You must agree before submitting.</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Complete Registration</button>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#disclaimerModal">
+                                    Read Disclaimer
+                                </button>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Disclaimer Modal -->
+<div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="disclaimerModalLabel">Disclaimer for Users of the Digital Platform</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="white-space: pre-wrap;">
+                BY USING THIS PLATFORM, YOU ACKNOWLEDGE AND AGREE THAT:
+
+                a. THE INFORMATION PROVIDED AND OBTAINED ON THE PLATFORM IS DIRECTLY FROM THE UNIVERSITY/COLLEGE/INSTITUTION. WHILE CERTITRACK STRIVES TO ENSURE THAT THE CONTENT IS OBTAINED DIRECTLY FROM THE UNIVERSITY/COLLEGE/INSTITUTION, NO GUARANTEES ARE MADE REGARDING THE COMPLETENESS, ACCURACY, RELIABILITY, SUITABILITY OF ANY INFORMATION, CONTENT, OR MATERIALS FOUND ON OR THROUGH THE PLATFORM AS IT DOES NOT HAVE ANY INPUT AND CANNOT EDIT OR RETAIN THE INFORMATION WHICH MOVES DIRECTLY FROM THE UNIVERSITY/COLLEGE/INSTITUTION TO THE USER
+
+                b. CERTITRACK SHALL NOT BE HELD LIABLE FOR ANY DAMAGES RESULTING FROM THE USE OF OR RELIANCE ON ANY CONTENT, INFORMATION, OR SERVICES PROVIDED BY THE SCHOOL/UNIVERSITY THROUGH THE PLATFORM.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="acceptDisclaimerBtn">I Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        @* <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const acceptBtn = document.getElementById('acceptDisclaimerBtn');
+                const checkbox = document.getElementById('disclaimerCheck');
+                const submitBtn = document.getElementById('submitBtn');
+                const disclaimerModal = new bootstrap.Modal(document.getElementById('disclaimerModal'));
+
+                acceptBtn.addEventListener('click', function () {
+                    disclaimerModal.hide();
+                    checkbox.disabled = false;
+                    checkbox.checked = true;
+                    submitBtn.disabled = false;
+                });
+
+                checkbox.addEventListener('change', function () {
+                    submitBtn.disabled = !checkbox.checked;
+                });
+            });
+        </script> *@
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const acceptBtn = document.getElementById('acceptDisclaimerBtn');
+            const checkbox = document.getElementById('disclaimerCheck');
+            const submitBtn = document.getElementById('submitBtn');
+
+            acceptBtn?.addEventListener('click', function () {
+                const modalElement = document.getElementById('disclaimerModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+
+                checkbox.disabled = false;
+                checkbox.checked = true;
+                submitBtn.disabled = false;
+            });
+
+            checkbox?.addEventListener('change', function () {
+                submitBtn.disabled = !checkbox.checked;
+            });
+        });
+    </script>
+}

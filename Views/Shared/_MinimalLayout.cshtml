@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Certitrack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+    <!-- App CSS -->
+    <link href="~/assets1/css/default/app.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <!-- Bootstrap CSS (Local) -->
+    <link href="~/lib/bootstrap/bootstrap-5.3.6-dist/css/bootstrap.css" rel="stylesheet" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div id="page-container" class="fade">
+        <div id="header" class="header navbar-default">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand"><span class="navbar-logo"></span> <b>Certi</b>track</a>
+            </div>
+        </div>
+
+        <div class="content" style="padding: 30px;">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Local Scripts (in correct order) -->
+    <script src="~/lib/jquery/jquery-3.7.1.js"></script>
+    <script src="~/lib/bootstrap/bootstrap-5.3.6-dist/js/bootstrap.js"></script>
+
+    <!-- jQuery Validation (Optional - Download and use locally if needed) -->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+    <!-- App JS -->
+    <script src="~/assets1/js/app.min.js" asp-append-version="true"></script>
+    <script src="~/assets1/js/theme/default.min.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
