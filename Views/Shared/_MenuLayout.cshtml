@@ -24,6 +24,9 @@
 	<link href="../assets1/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
 	<link href="../assets1/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+	<!-- Add this to your layout/head section if not already there -->
+
+
 </head>
 
 <body>
@@ -54,7 +57,7 @@
 				<li class="dropdown navbar-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="../assets/img/user/user-13.jpg" alt="" />
-						<span class="d-none d-md-inline">Ojediran Remi</span> <b class="caret"></b>
+						<span class="d-none d-md-inline">@userFullName</span> <b class="caret"></b>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="javascript:;" class="dropdown-item">Edit Profile</a>
@@ -106,30 +109,28 @@
 					@if (userRoleName == "SuperAdmin" || userRoleName == "AdminUser")
 					{
 						<li><a href="/Account/Index"><i class="fa fa-user"></i> <span>User  Account Management</span></a></li>
-						<li><a href="/home/uploadcredential"><i class="fa fa-image"></i> <span>Upload Credential</span></a></li>
-						<li><a href="calendar.html"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li>
-						<li><a href="calendar.html"><i class="fa fa-align-left"></i> <span>Upload Transcript</span></a></li>
+						<li><a href="/Credential/Index"><i class="fa fa-image"></i> <span>Insert Credential Detail</span></a></li>
+						@* <li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li> *@
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Request Transcript</span></a></li>
 					}
 					@if (userRoleName == "VerifierUser")
                     {
-                        <li><a href="/home/uploadcredential"><i class="fa fa-image"></i> <span>Upload Credential</span></a></li>
-                        <li><a href="/home/viewcredential"><i class="fa fa-eye"></i> <span>View Credential</span></a></li>
-                        <li><a href="/home/viewtranscript"><i class="fa fa-eye"></i> <span>View Transcript</span></a></li>
+						<li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Request Transcript</span></a></li>
                     }
 
 					@if (userRoleName == "VerifierApproval")
 					{
 						@* <li><a href="/home/uploadcredential"><i class="fa fa-image"></i> <span>Upload Credential</span></a></li> *@
-						<li><a href="/home/viewcredential"><i class="fa fa-eye"></i> <span>View Credential</span></a></li>
-						<li><a href="/home/viewtranscript"><i class="fa fa-eye"></i> <span>View Transcript</span></a></li>
+						<li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Request Transcript</span></a></li>
 					}
 
 					@if (userRoleName == "Agent" || userRoleName == "Requester")
 					{
-						@* <li><a href="/Account/Index"><i class="fa fa-user"></i> <span>User  Account Management</span></a></li> *@
-						<li><a href="/home/uploadcredential"><i class="fa fa-image"></i> <span>Upload Credential</span></a></li>
-						<li><a href="calendar.html"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li>
-						<li><a href="calendar.html"><i class="fa fa-align-left"></i> <span>Upload Transcript</span></a></li>
+						
+						<li><a href="/Credential/Index"><i class="fa fa-image"></i> <span>View Credential Detail</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>View Transcript</span></a></li>
 					}
 					
 	
@@ -180,7 +181,9 @@
 		  });
 		}
 	</script>
-	RenderSection("Scripts", required: false)
+	@RenderSection("Scripts", required: false)
+	
+
 
 </body>
 </html>

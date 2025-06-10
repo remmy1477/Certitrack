@@ -1,0 +1,598 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model X.PagedList.IPagedList<Certitrack.ViewModels.TranscriptRequestIndexVM>
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+
+@{
+    ViewData["Title"] = "Transcript List";
+    Layout = "_MenuLayout"; // Make sure this matches your layout
+    var userRole = Context.Session.GetString("UserRoleName");
+}
+<div id="content" class="content">
+
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Transcript Request</li>
+    </ol>
+
+    <h1 class="page-header">Transcripts <small>List of Transcript Request</small></h1>
+
+    <div class="col-xl-12">
+        <div class="panel panel-inverse" data-sortable-id="table-basic-1">
+            <div class="panel-heading">
+                <h4 class="panel-title">Transcript Request Table</h4>
+                <div class="panel-heading-btn">
+                    <a asp-action="ExportInvites" class="btn btn-sm btn-success">Download CSV</a>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["Message"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @if (userRole != "VerifierUser" || userRole != "VerifierApproval")
+                {
+                    <div class="mb-3 text-end">
+                        <a asp-action="Create" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>Insert Transcript Request
+                        </a>
+                    </div>
+                }
+               
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>
+                                    @Html.ActionLink("Institution", "Index", new { sortOrder = ViewBag.InstitutionIdSortParm, page = Model.PageNumber })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("School", "Index", new { sortOrder = ViewBag.SchoolIdSortParm, page = Model.PageNumber })
+                                </th>
+                                @* <th>Created</th>
+                 <th>Expires</th> *@
+                                <th>Name</th>
+                               @*  <th>School</th> *@
+                                <th>Faculty</th>
+                                <th>Department</th>
+                                <th>Matric No.</th>
+                                <th>Status</th>
+                               <th>Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                int sn = (Model.PageNumber - 1) * Model.PageSize + 1;
+                                foreach (var transcriptRequest in Model)
+                                {
+                                    <tr>
+                                        <td>@sn</td>
+                                        <td>@transcriptRequest.InstitutionName</td>
+                                        <td>@transcriptRequest.SchoolName</td>
+                                        <td>@($"{transcriptRequest.FirstName} {transcriptRequest.MiddleName} {transcriptRequest.LastName}".Trim())</td>
+                                        
+                                        <td>@transcriptRequest.FacultyName</td>
+                                        <td>@transcriptRequest.Department</td>
+                                       
+                                        <td>@transcriptRequest.MatricNumber</td>
+                                      
+                                        <td>@transcriptRequest.Status</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detailsModal_@transcriptRequest.Id">
+                                                View Detail
+                                            </button>
+                                            @if (userRole == "SuperAdmin")
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@transcriptRequest.Id" class="btn btn-sm btn-warning">Edit</a>
+                                                <a asp-action="Delete" asp-route-id="@transcriptRequest.Id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                                            }
+                                            else if (userRole == "VerifierUser")
+                                            {
+                                                @* <button class="btn btn-success verify-btn" data-id="@transcriptRequest.Id">Verify</button> *@
+                                                <button class="btn btn-sm btn-info verify-btn" data-toggle="modal" data-target="#verifyModal" data-id="@transcriptRequest.Id">Verify Transcript</button>
+                                                <button class="btn btn-danger not-verified-btn" data-toggle="modal" data-target="#notVerifiedModal" data-id="@transcriptRequest.Id">Transcript Not Verified</button>
+                                            }
+                                            else if (userRole == "VerifierApproval")
+                                            {
+                                                bool isVerify = transcriptRequest.Status == "Verified"?true:false; // Assuming this is set in your ViewModel
+
+                                                
+
+                                                <button class="btn btn-sm btn-success send-btn" data-toggle="modal" data-target="#sendModal" data-id="@transcriptRequest.Id" @(isVerify ? "" : "disabled")>Transcript Record Found. Click to Send Email </button>
+                                                <button class="btn btn-danger notfound-btn" data-toggle="modal" data-target="#notFoundModal" data-id="@transcriptRequest.Id" @(isVerify ? "" : "disabled")>Transcript Not Found. Click to Send Email</button>
+                                              
+                                            }
+
+                                        </td>
+                                    </tr>
+
+                                    <div class="modal fade" id="detailsModal_@transcriptRequest.Id" tabindex="-1" role="dialog" aria-labelledby="detailsLabel_@transcriptRequest.Id" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="detailsLabel_@transcriptRequest.Id">Certificate Detail</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-4">Institution</dt>
+                                                        <dd class="col-sm-8">@transcriptRequest.InstitutionName</dd>
+
+                                                        <dt class="col-sm-4">School</dt>
+                                                        <dd class="col-sm-8">@transcriptRequest.SchoolName</dd>
+
+                                                        <dt class="col-sm-4">Faculty/College/School</dt>
+                                                        <dd class="col-sm-8">@transcriptRequest.FacultyName</dd>
+
+                                                        <dt class="col-sm-4">Department</dt>
+                                                        <dd class="col-sm-8">@transcriptRequest.Department</dd>
+
+                                                        <dt class="col-sm-4">Year of Graduation</dt>
+                                                        <dd class="col-sm-8">@transcriptRequest.YearOfGraduation</dd>
+
+                                                       
+
+                                                        <dt class="col-sm-4">Full Name</dt>
+                                                        <dd class="col-sm-8">@($"{transcriptRequest.FirstName} {transcriptRequest.MiddleName} {transcriptRequest.LastName}".Trim())</dd>
+
+                                                      
+
+                                                        <dt class="col-sm-4">Status</dt>
+                                                        <dd class="col-sm-8">@transcriptRequest.Status</dd>
+
+                                                      
+                                                    </dl>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    sn++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center">No Transcript Request found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }), new PagedListRenderOptions()
+                   {
+                       LiElementClasses = new[] { "page-item" },
+                       PageClasses = new[] { "page-link" },
+                       UlElementClasses = new[] { "pagination" }
+                   })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@* <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="verifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="verifyForm" action="#" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verifyModalLabel">Verify Transcript Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="verifyRequestId" name="requestId" />
+                    <p>Confirm that the transcript record exists and is valid.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Mark as Verified</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> *@
+<div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="verifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="verifyForm" method="post">
+                <!-- Important -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verifyModalLabel">Verify Transcript Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="verifyRequestId" name="requestId" />
+                    <p>Confirm that the transcript record exists and is valid.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Mark as Verified</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="notVerifiedModal" tabindex="-1" role="dialog" aria-labelledby="notVerifiedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="notVerifiedForm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notVerifiedModalLabel">Confirm Transcript Not Verified</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please confirm that this transcript request could not be verified.</p>
+                    <input type="hidden" id="notVerifiedRequestId" name="requestId" />
+                    <textarea class="form-control" name="Reason" placeholder="Optional reason (e.g., record not found)"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Add enctype for file upload -->
+            <form id="sendForm" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sendModalLabel">Send Transcript</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="sendRequestId" name="requestId" />
+                    <p>Attach and send transcript to requester.</p>
+
+                    <!-- File input -->
+                    <div class="form-group">
+                        <label for="transcriptFile">Transcript File</label>
+                        <input type="file" class="form-control-file" id="transcriptFile" name="transcriptFile" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Send Transcript</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="notFoundModal" tabindex="-1" role="dialog" aria-labelledby="notFoundModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="notFoundForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notFoundModalLabel">Transcript Request Reject</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="notFoundRequestId" name="requestId" />
+                    <p>This action will notify the requester that the transcript was not found. Proceed?</p>
+                    <div class="form-group">
+                        <label for="notFoundReason">Reason</label>
+                        <textarea class="form-control" id="notFoundReason" name="reason" rows="3" placeholder="Enter reason..." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Send Notification</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@* @section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Populate verify modal
+           // $('.verify-btn').click(function () {
+            $(document).on('click', '.verify-btn', function () {
+                const id = $(this).data('id');
+                 //console.log("Clicked ID:", id);
+                $('#verifyRequestId').val(id);
+                $('#verifyModal').modal('show');
+            });
+
+       
+
+            // Populate "Transcript Not Verified" modal
+            $(document).on('click', '.not-verified-btn', function () {
+                const requestId = $(this).data('id');
+               
+                $('#notVerifiedRequestId').val(requestId);
+                $('#notVerifiedModal').modal('show');
+            });
+
+            // Populate send modal
+            //$('.send-btn').click(function () {
+           $(document).on('click','.send-btn').click(function () {
+                var id = $(this).data('id');
+                $('#sendRequestId').val(id);
+            });
+
+
+            // AJAX for verifying transcript
+           
+
+        $('#verifyForm').on('submit', function (e) {
+            console.log("Submit handler triggered");
+            e.preventDefault();
+
+            var requestId = $('#verifyRequestId').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Transcript/VerifyTranscriptRequest',
+                data: {
+                    Id: requestId,
+                    recordExists: true,
+                    reason: ''
+                },
+                success: function () {
+                    alert('Transcript marked as verified!');
+                    $('#verifyModal').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Error verifying transcript.');
+                }
+            });
+        })
+
+
+                     // Submit "Transcript Not Verified" form
+        $('#notVerifiedForm').on('submit', function (e) {
+            e.preventDefault();
+
+            // Get values from the form
+           // var requestId = $('#notVerifiedForm input[name="requestId"]').val();
+           var requestId = $('#notVerifiedRequestId').val();
+           alert(requestId);
+           var reason = $('#notVerifiedForm textarea[name="Reason"]').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Transcript/VerifyTranscriptRequest',
+                data: { Id: requestId, recordExists: false, reason: reason },
+                success: function (response) {
+                    alert('Transcript marked as not verified.');
+                    $('#notVerifiedModal').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Error submitting "not verified" response.');
+                }
+            });
+        });
+
+                   // Populate send modal
+        $('.send-btn').click(function () {
+            var id = $(this).data('id');
+            $('#sendRequestId').val(id);
+            $('#sendModal').modal('show');
+        });
+
+        // Submit form with file using FormData
+        $('#sendForm').submit(function (e) {
+            e.preventDefault();
+
+            var form = $('#sendForm')[0];
+            var formData = new FormData(form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Transcript/ApproveAndSendTranscript',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    alert('Transcript sent successfully!');
+                    $('#sendModal').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Failed to send transcript.');
+                }
+            });
+        });
+
+
+                    // Show the "not found" modal
+        $('.notfound-btn').click(function () {
+            var id = $(this).data('id');
+            $('#notFoundRequestId').val(id);
+            $('#notFoundModal').modal('show');
+        });
+
+        $('#notFoundForm').submit(function (e) {
+            e.preventDefault();
+
+            var requestId = $('#notFoundRequestId').val();
+            var reason = $('#notFoundReason').val().trim();
+
+            if (reason === '') {
+                alert('Please provide a reason before submitting.');
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/Transcript/RejectTranscriptRequest',
+                data: { Id: requestId, reason: reason },
+                success: function () {
+                    alert('Notification sent: Transcript not found.');
+                    $('#notFoundModal').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Failed to send "not found" notification.');
+                }
+            });
+        });
+
+    </script>
+} *@
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Populate verify modal
+            $(document).on('click', '.verify-btn', function () {
+                const id = $(this).data('id');
+                $('#verifyRequestId').val(id);
+                $('#verifyModal').modal('show');
+            });
+
+            // Populate "Transcript Not Verified" modal
+            $(document).on('click', '.not-verified-btn', function () {
+                const requestId = $(this).data('id');
+                $('#notVerifiedRequestId').val(requestId);
+                $('#notVerifiedModal').modal('show');
+            });
+
+            // Populate send modal
+            $(document).on('click', '.send-btn', function () {
+                var id = $(this).data('id');
+                $('#sendRequestId').val(id);
+                $('#sendModal').modal('show');
+            });
+
+            // AJAX for verifying transcript
+            $('#verifyForm').on('submit', function (e) {
+                console.log("Submit handler triggered");
+                e.preventDefault();
+
+                var requestId = $('#verifyRequestId').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Transcript/VerifyTranscriptRequest',
+                    data: {
+                        Id: requestId,
+                        recordExists: true,
+                        reason: ''
+                    },
+                    success: function () {
+                        alert('Transcript marked as verified!');
+                        $('#verifyModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Error verifying transcript.');
+                    }
+                });
+            });
+
+            // Submit "Transcript Not Verified" form
+            $('#notVerifiedForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var requestId = $('#notVerifiedRequestId').val();
+                var reason = $('#notVerifiedForm textarea[name="Reason"]').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Transcript/VerifyTranscriptRequest',
+                    data: { Id: requestId, recordExists: false, reason: reason },
+                    success: function (response) {
+                        alert('Transcript marked as not verified.');
+                        $('#notVerifiedModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Error submitting "not verified" response.');
+                    }
+                });
+            });
+
+            // Show the "not found" modal
+            $(document).on('click', '.notfound-btn', function () {
+                var id = $(this).data('id');
+                $('#notFoundRequestId').val(id);
+                $('#notFoundModal').modal('show');
+            });
+
+            $('#notFoundForm').submit(function (e) {
+                e.preventDefault();
+
+                var requestId = $('#notFoundRequestId').val();
+                var reason = $('#notFoundReason').val().trim();
+
+                if (reason === '') {
+                    alert('Please provide a reason before submitting.');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Transcript/RejectTranscriptRequest',
+                    data: { Id: requestId, reason: reason },
+                    success: function () {
+                        alert('Notification sent: Transcript not found.');
+                        $('#notFoundModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Failed to send "not found" notification.');
+                    }
+                });
+            });
+
+            // Send transcript with file
+            $('#sendForm').submit(function (e) {
+                e.preventDefault();
+
+                var form = $('#sendForm')[0];
+                var formData = new FormData(form);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Transcript/ApproveAndSendTranscript',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                        alert('Transcript sent successfully!');
+                        $('#sendModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Failed to send transcript.');
+                    }
+                });
+            });
+        });
+    </script>
+}
+

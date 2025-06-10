@@ -20,11 +20,12 @@ namespace Certitrack.Controllers
         private readonly IUserRegistrationInviteService _userRegistrationInviteService;
         private readonly ITitleService _titleService;
         private readonly IInstitutionTypeService _institutionTypeService;
-
+        private readonly IIInstitutionService _institutionService;
+        private readonly ISchoolService _schoolService;
 
         public AccountController(IUserService userService, IRoleService roleService, 
             GEmailService gemailService, IUserRegistrationInviteService userRegistrationInviteService,
-            ITitleService titleService, IInstitutionTypeService institutionTypeService)
+            ITitleService titleService, IInstitutionTypeService institutionTypeService, IIInstitutionService institutionService, ISchoolService schoolService)
         {
             _userService = userService;
             _roleService = roleService;
@@ -32,6 +33,8 @@ namespace Certitrack.Controllers
             _userRegistrationInviteService = userRegistrationInviteService;
             _titleService = titleService;
             _institutionTypeService = institutionTypeService;
+            _institutionService = institutionService;
+            _schoolService = schoolService;
         }
         public async Task<IActionResult> Index(int? page)
         {
@@ -151,11 +154,14 @@ namespace Certitrack.Controllers
 
 
             //Password@123
-            var user = await _userService.AuthenticateAsync(model.Email, HashPassword(model.Password));  
-
+            var user = await _userService.AuthenticateAsync(model.Email, HashPassword(model.Password));
+            
             if (user != null && user.IsActive)
             {
-                
+                var invite = (await _userRegistrationInviteService.GetAlllUserRegistrationInvitesAsync())
+             .FirstOrDefault(ui => ui.Id == user.InviteId);
+
+
                 HttpContext.Session.SetString("UserEmail", model.Email);
                 // Combine Firstname, Middlename, and Lastname into a full name (handle possible nulls)
                 var fullName = $"{user.FirstName} {user.MiddleName} {user.LastName}".Trim();
@@ -163,6 +169,9 @@ namespace Certitrack.Controllers
                 HttpContext.Session.SetString("UserFullName", fullName);
                 HttpContext.Session.SetString("UserRole", user.RoleId.ToString());
                 HttpContext.Session.SetString("UserRoleName", role.Name.ToString());
+                HttpContext.Session.SetString("UserId", user.Id.ToString());
+                HttpContext.Session.SetString("InstitutionType", invite?.TypeId?.ToString() ?? string.Empty);
+                HttpContext.Session.SetString("SchoolId", invite?.SchoolId?.ToString() ?? string.Empty);
                 return Ok(new { success = true, message = "Login successful" });
             }
 
@@ -273,7 +282,7 @@ namespace Certitrack.Controllers
 
             };
 
-            _userRegistrationInviteService.CreateInviteAsync(userRegistrationInvite);   
+            await _userRegistrationInviteService.CreateInviteAsync(userRegistrationInvite);   
 
 
             string activationLink = Url.Action("ActivateAccount", "Account", new { token = token }, Request.Scheme);
@@ -342,6 +351,9 @@ namespace Certitrack.Controllers
             var titles = await _titleService.GetAllTitlesAsync();
             ViewBag.Titles = new SelectList(titles, "Id", "Name");
 
+            var schools = await _schoolService.GetAllSchoolsAsync();
+            ViewBag.Schools = new SelectList(schools, "Id", "Name");
+
             var model = new CompleteRegistrationVM
             {
                 Email = email,
@@ -362,7 +374,8 @@ namespace Certitrack.Controllers
                 OrganizationEmail = string.Empty,
                 RCNo = string.Empty,
                 ITNo = string.Empty,
-                BNNo = string.Empty
+                BNNo = string.Empty,
+                SchoolId =0
             };
 
             return View(model);
@@ -379,6 +392,9 @@ namespace Certitrack.Controllers
                 // ViewBag.Roles = await _roleService.GetAllRolesAsync();
                 var titles = await _titleService.GetAllTitlesAsync();
                 ViewBag.Titles = new SelectList(titles, "Id", "Name");
+                ViewBag.Institutions = await _institutionService.GetAllInstitutionsAsync();
+                var schools = await _schoolService.GetAllSchoolsAsync();
+                ViewBag.Schools = new SelectList(schools, "Id", "Name");
                 return View(model);
             }
 
@@ -390,7 +406,8 @@ namespace Certitrack.Controllers
             existingInvite.OrganizationEmail = model.OrganizationEmail;
             existingInvite.RCNo = model.RCNo;
             existingInvite.ITNo = model.ITNo;
-            existingInvite.BNNo = model.BNNo;   
+            existingInvite.BNNo = model.BNNo;
+            existingInvite.SchoolId = model.SchoolId ==null? 0 : model.SchoolId;
 
             await _userRegistrationInviteService.UpdateInviteAsync(existingInvite);
             ////if (existingInvite == null || existingInvite.Used || existingInvite.ExpiresAt < DateTime.UtcNow)

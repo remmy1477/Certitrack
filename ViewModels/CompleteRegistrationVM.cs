@@ -19,13 +19,15 @@
         public string Address { get; set; }
 
        // public string OrganizationName { get; set; }
-        public string OrganizationName { get; set; }
+        public string? OrganizationName { get; set; }
         public string? OrganizationAddress { get; set; }
         public string? OrganizationPhone { get; set; }
         public string? OrganizationEmail { get; set; }
         public string? RCNo { get; set; }
         public string? ITNo { get; set; }
         public string? BNNo { get; set; }
+
+        public long? SchoolId { get; set; }
 
 
 

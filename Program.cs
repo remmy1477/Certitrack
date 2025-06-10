@@ -28,6 +28,30 @@ builder.Services.AddScoped<GEmailService>();
 builder.Services.AddScoped<IUserRegistrationInviteRepository, UserRegistrationInviteRepository>();
 builder.Services.AddScoped<IUserRegistrationInviteService, UserRegistrationInviteService>();
 
+builder.Services.AddScoped<ICertificateDetailRepository, CertificateDetailRepository>();
+builder.Services.AddScoped<ICertificateDetailService, CertificateDetailService>();
+
+builder.Services.AddScoped<IInstitutionRepository, InstitutionRepository>();
+builder.Services.AddScoped<IIInstitutionService, InstitutionService> ();
+
+builder.Services.AddScoped<IInstitutionRepository, InstitutionRepository>();
+builder.Services.AddScoped<IIInstitutionService, InstitutionService>();
+
+builder.Services.AddScoped<IQualificationTypesRepository,QualificationTypeRepository> ();
+builder.Services.AddScoped <IQualificationTypeService,QualificationTypeService> ();
+
+builder.Services.AddScoped<IQualificationClasssRepository, QualificationClassRepository>();
+builder.Services.AddScoped<IQualificationClassService, QualificationClassService>();
+
+builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
+builder.Services.AddScoped<IFacultyService, FacultyService>();
+
+builder.Services.AddScoped<ISchoolRepository, SchoolRepository>();
+builder.Services.AddScoped<ISchoolService, SchoolService>();
+
+builder.Services.AddScoped<ITranscriptRequestRepository, TranscriptRequestRepository>();
+builder.Services.AddScoped<ITranscriptRequestService, TranscriptRequestService>();
+
 
 
 builder.Services.AddSession(options =>

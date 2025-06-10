@@ -82,42 +82,63 @@
                                     <h5>Organisation Information</h5>
                                     <hr />
                                 </div>
+                                @if (Model.TypeId != 3)
+                                {
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="OrganizationName" class="form-control" placeholder="Organization Name" />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="OrganizationPhone" class="form-control" placeholder="Organization Phone" />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="OrganizationEmail" class="form-control" placeholder="Organization Email" />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="RCNo" class="form-control" placeholder="RC No." />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="ITNo" class="form-control" placeholder="IT No." />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="BNNo" class="form-control" placeholder="BN No." />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                    <div class="col-md-12">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="OrganizationAddress" class="form-control" placeholder="Organization Address" />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                    </div>
+                                }
+                                else if (Model.TypeId == 3)
+                                {
+                                    <input type="hidden" asp-for="OrganizationName" />
+                                    <input type="hidden" asp-for="OrganizationPhone" />
+                                    <input type="hidden" asp-for="OrganizationEmail" />
+                                    <input type="hidden" asp-for="RCNo" />
+                                    <input type="hidden" asp-for="ITNo" />
+                                    <input type="hidden" asp-for="ITNo" />
+                                    <input type="hidden" asp-for="BNNo" />
+                                    <input type="hidden" asp-for="OrganizationAddress" />
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Title" class="form-label">Title</label> *@
+                                        <select asp-for="SchoolId" class="form-select" asp-items="ViewBag.schools">
+                                            <option value="0">-- Select School --</option>
+                                        </select>
+                                        <span asp-validation-for="SchoolId" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-4">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="OrganizationName" class="form-control" placeholder="Organization Name" />
-                                   @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
-                                <div class="col-md-4">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="OrganizationPhone" class="form-control" placeholder="Organization Phone" />
-                                    @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
-                                <div class="col-md-4">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="OrganizationEmail" class="form-control" placeholder="Organization Email" />
-                                    @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
-                                <div class="col-md-4">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="RCNo" class="form-control" placeholder="RC No." />
-                                    @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
-                                <div class="col-md-4">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="ITNo" class="form-control" placeholder="IT No." />
-                                    @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
-                                <div class="col-md-4">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="BNNo" class="form-control" placeholder="BN No." />
-                                    @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
-                                <div class="col-md-12">
-                                    @* <label asp-for="Phone" class="form-label"></label> *@
-                                    <input asp-for="OrganizationAddress" class="form-control" placeholder="Organization Address" />
-                                    @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
-                                </div>
+                                }
 
                                 <!-- Group: Personal Information -->
                                 <div class="col-12">

@@ -21,6 +21,21 @@ namespace Certitrack.Data
         public DbSet<UserRegistrationInvite> UserRegistrationInvites { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<SchoolType> SchoolTypes { get; set; }
+
+        public DbSet<School> Schools { get; set; }
+
+        public DbSet<CertificateDetail> CertificateDetails { get; set; }
+
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<QualificationType> QualificationTypes { get; set; }
+        public DbSet<QualificationClass> QualificationClasses { get; set; }
+
+        public DbSet<TranscriptRequest> TranscriptRequests { get; set; }
+
+        
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -60,7 +75,8 @@ namespace Certitrack.Data
                    Created = now,
                    Updated = now,
                    CreatedBy = "System",
-                   LastModifiedBy = "System"
+                   LastModifiedBy = "System",
+                   ApprovalToken = string.Empty
                }
            );
             modelBuilder.Entity<UserRole>().HasData(
@@ -77,6 +93,14 @@ namespace Certitrack.Data
                       LastModifiedBy = "System"
                   }
               );
+            modelBuilder.Entity<SchoolType>().HasData(
+               new SchoolType { Id = 1, Name = "Primary", Created = now, Updated = now, CreatedBy = "System", LastModifiedBy = "System" },
+               new SchoolType { Id = 2, Name = "Secondary", Created = now, Updated = now, CreatedBy = "System", LastModifiedBy = "System" },
+               new SchoolType { Id = 3, Name = "Technical College", Created = now, Updated = now, CreatedBy = "System", LastModifiedBy = "System" },
+               new SchoolType { Id = 4, Name = "College of Education", Created = now, Updated = now, CreatedBy = "System", LastModifiedBy = "System" },
+               new SchoolType { Id = 5, Name = "Polythenic", Created = now, Updated = now, CreatedBy = "System", LastModifiedBy = "System" },
+               new SchoolType { Id = 6, Name = "University", Created = now, Updated = now, CreatedBy = "System", LastModifiedBy = "System" }
+           );
         }
     }
 }

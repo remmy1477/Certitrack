@@ -17,13 +17,15 @@
         public string LastModifiedBy { get; set; }
 
         // public string OrganizationName { get; set; }
-        public string? OrganizationName { get; set; }
-        public string? OrganizationAddress { get; set; }
-        public string? OrganizationPhone { get; set; }
-        public string? OrganizationEmail { get; set; }
-        public string? RCNo { get; set; }
-        public string? ITNo { get; set; }
+        public string? OrganizationName { get; set; } = string.Empty;
+        public string? OrganizationAddress { get; set; } = string.Empty;
+        public string? OrganizationPhone { get; set; } = string.Empty;
+        public string? OrganizationEmail { get; set; } = string.Empty;
+        public string? RCNo { get; set; } = string.Empty;
+        public string? ITNo { get; set; } = string.Empty;
 
-        public string? BNNo { get; set; }
+        public string? BNNo { get; set; } = string.Empty;
+
+        public long? SchoolId { get; set; } = 0;
     }
 }
