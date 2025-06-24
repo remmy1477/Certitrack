@@ -63,6 +63,7 @@
                                 <th>Faculty</th>
                                 <th>Department</th>
                                 <th>Matric No.</th>
+                                <th>Payment Status</th>
                                 <th>Status</th>
                                <th>Actions</th>
 
@@ -84,6 +85,23 @@
                                         <td>@transcriptRequest.Department</td>
                                        
                                         <td>@transcriptRequest.MatricNumber</td>
+                                        <td>
+                                            @if (transcriptRequest.IsPaid)
+                                            {
+                                                <span class="badge bg-success">Paid</span>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-sm btn-success pay-btn mt-1"
+                                                        data-id="@transcriptRequest.Id"
+                                                        data-email="@transcriptRequest.DestinationEmail"
+                                                        data-name="@($"{transcriptRequest.FirstName} {transcriptRequest.MiddleName} {transcriptRequest.LastName}".Trim())"
+                                                        data-type="T"
+                                                        data-amount="300000">
+                                                    Pay Now
+                                                </button> @* Amount in Kobo e.g. ₦2000 = 200000 *@
+                                            }
+                                        </td>
                                       
                                         <td>@transcriptRequest.Status</td>
                                         <td>
@@ -593,6 +611,44 @@
                 });
             });
         });
+    </script>
+
+    <script>
+                $(document).ready(function () {
+            $('.pay-btn').click(function () {
+                const btn = $(this);
+                const TranscriptId = btn.data('id');
+                const email = btn.data('email');
+                const fullName = btn.data('name');
+                const amount = btn.data('amount');
+                const type = btn.data('type');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Payment/Initialize',
+                    data: {
+                        id: TranscriptId,
+                        email: email,
+                        amount: amount,
+                        name: fullName, // Add comma here
+                        type: type
+                    },
+                    success: function (response) {
+                        if (response && response.status && response.data && response.data.authorization_url) {
+                            window.location.href = response.data.authorization_url;
+                        } else {
+                            alert('Error: Could not initiate payment.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error initiating payment.');
+                    }
+                });
+            });
+        });
+
+
+
     </script>
 }
 

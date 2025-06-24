@@ -80,7 +80,8 @@ namespace Certitrack.Controllers
                             OrganizationAddress = invite.OrganizationAddress,
                             OrganizationPhone = invite.OrganizationPhone,
                             OrganizationEmail = invite.OrganizationEmail,
-                            IsActive = accountStatus
+                            IsActive = accountStatus,
+                            activationlink = invite.activationlink
                         });
                     }
                     else 
@@ -96,7 +97,8 @@ namespace Certitrack.Controllers
                             OrganizationAddress = invite.OrganizationAddress == null?"": invite.OrganizationAddress,
                             OrganizationPhone = invite.OrganizationPhone == null?"": invite.OrganizationPhone,
                             OrganizationEmail = invite.OrganizationEmail == null?"": invite.OrganizationEmail,
-                            IsActive = false
+                            IsActive = false,
+                            activationlink = invite.activationlink
                         });
                     }
 
@@ -172,6 +174,7 @@ namespace Certitrack.Controllers
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
                 HttpContext.Session.SetString("InstitutionType", invite?.TypeId?.ToString() ?? string.Empty);
                 HttpContext.Session.SetString("SchoolId", invite?.SchoolId?.ToString() ?? string.Empty);
+               // HttpContext.Session.SetString("InstitutionId", invite?.Co ?? string.Empty);
                 return Ok(new { success = true, message = "Login successful" });
             }
 
@@ -265,6 +268,7 @@ namespace Certitrack.Controllers
 
             // Example token generation
             string token = Guid.NewGuid().ToString(); // store this with the user/invite for later verification
+            string activationLink = Url.Action("ActivateAccount", "Account", new { token = token }, Request.Scheme);
 
             var userRegistrationInvite = new UserRegistrationInvite
             {
@@ -277,7 +281,8 @@ namespace Certitrack.Controllers
                 Updated = DateTime.UtcNow,
                 CreatedBy = HttpContext.Session.GetString("UserEmail"), // Assuming you have a way to get the current user's email
                 LastModifiedBy = HttpContext.Session.GetString("UserEmail"),
-                TypeId = model.TypeId
+                TypeId = model.TypeId,
+                activationlink = activationLink
 
 
             };
@@ -285,7 +290,7 @@ namespace Certitrack.Controllers
             await _userRegistrationInviteService.CreateInviteAsync(userRegistrationInvite);   
 
 
-            string activationLink = Url.Action("ActivateAccount", "Account", new { token = token }, Request.Scheme);
+           
 
             string subject = "CertiTrack – Account Creation Request";
             string body = $@"
@@ -354,6 +359,9 @@ namespace Certitrack.Controllers
             var schools = await _schoolService.GetAllSchoolsAsync();
             ViewBag.Schools = new SelectList(schools, "Id", "Name");
 
+            var orgs = await _institutionService.GetAllInstitutionsAsync();
+            ViewBag.Institutions = new SelectList(orgs, "Id", "Name");
+
             var model = new CompleteRegistrationVM
             {
                 Email = email,
@@ -368,7 +376,7 @@ namespace Certitrack.Controllers
                 Phone = string.Empty,
                 Address = string.Empty,
                 Title = 0,
-                OrganizationName = string.Empty,
+                //OrganizationName = string.Empty,
                 OrganizationAddress = string.Empty,
                 OrganizationPhone = string.Empty,
                 OrganizationEmail = string.Empty,
@@ -395,12 +403,14 @@ namespace Certitrack.Controllers
                 ViewBag.Institutions = await _institutionService.GetAllInstitutionsAsync();
                 var schools = await _schoolService.GetAllSchoolsAsync();
                 ViewBag.Schools = new SelectList(schools, "Id", "Name");
+                var orgs = await _institutionService.GetAllInstitutionsAsync();
+                ViewBag.Institutions = new SelectList(orgs, "Id", "Name");
                 return View(model);
             }
 
             var existingInvite = await _userRegistrationInviteService.ValidateTokenAsync(model.Token);
           //  existingInvite.TypeId = model.TypeId;
-            existingInvite.OrganizationName = model.OrganizationName;
+            existingInvite.OrganizationName = model.OrganizationName == null?string.Empty: model.OrganizationName.ToString();
             existingInvite.OrganizationAddress = model.OrganizationAddress;
             existingInvite.OrganizationPhone = model.OrganizationPhone;
             existingInvite.OrganizationEmail = model.OrganizationEmail;
@@ -428,6 +438,8 @@ namespace Certitrack.Controllers
                 ModelState.AddModelError("", "A user with this email already exists.");
                 var titles = await _titleService.GetAllTitlesAsync();
                 ViewBag.Titles = new SelectList(titles, "Id", "Name");
+                var orgs = await _institutionService.GetAllInstitutionsAsync();
+                ViewBag.Institutions = new SelectList(orgs, "Id", "Name");
                 return View(model);
             }
 

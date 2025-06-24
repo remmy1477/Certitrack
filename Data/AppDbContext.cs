@@ -33,7 +33,9 @@ namespace Certitrack.Data
 
         public DbSet<TranscriptRequest> TranscriptRequests { get; set; }
 
-        
+        public DbSet<Payment> Payments { get; set; }
+
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -33,6 +33,8 @@ namespace Certitrack.ViewModels
         public string InstitutionNm { get; set; }
 
         public bool IsVerified { get; set; }
+
+        public bool Ispaid { get; set; }
         public string Status { get; set; }
     }
 }

@@ -57,7 +57,7 @@ namespace Certitrack.Controllers
                 }
                 else 
                 {
-                     credentials = (await _CDService.GetAllCertificateDetailAsync()).Where(cr => cr.SchoolId == int.Parse(schoolId));
+                     credentials = (await _CDService.GetAllCertificateDetailAsync()).Where(cr => cr.SchoolId == int.Parse(schoolId) && cr.Ispaid);
                 }
                     
                 var creditialsList = new List<CredentialDetailIndexVM>();
@@ -100,7 +100,8 @@ namespace Certitrack.Controllers
                             InstitutionNm = institution.Name,
                             IsVerified = credential.IsVerified,
                             Status = credential.Status,
-                            InstitutionId = credential.InstitutionId
+                            InstitutionId = credential.InstitutionId,
+                            Ispaid = credential.Ispaid
                         });
                     }
                 }
@@ -158,6 +159,7 @@ namespace Certitrack.Controllers
                 SchoolId = credentialDetailVM.SchoolId,
                 InstitutionId = credentialDetailVM.InstitutionId,
                 IsVerified = false,
+                Ispaid = false, 
                 Status = VerificationStatus.Pending.ToString(),
                 Created = DateTime.Now,
                 Updated = DateTime.Now,

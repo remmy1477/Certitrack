@@ -28,11 +28,13 @@ namespace Certitrack.Models
         public long InstitutionId { get; set; }
 
         public bool IsVerified { get; set; } = false;
+        public bool Ispaid { get; set; } = false;
         public string Status { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
+
 
     }
 }

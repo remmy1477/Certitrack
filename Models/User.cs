@@ -25,5 +25,6 @@
         public bool IsActive { get; set; } = false;
         public string? ApprovalToken { get; set; }  // Used for secure approval links
 
+        
     }
 }

@@ -27,5 +27,7 @@
         public string? BNNo { get; set; } = string.Empty;
 
         public long? SchoolId { get; set; } = 0;
+
+        public string? activationlink { get; set; }
     }
 }

@@ -18,6 +18,8 @@
         public string Department { get; set; }
         public string YearOfGraduation { get; set; }
         public string DestinationEmail { get; set; }
+
+        public bool IsPaid { get; set; }
         public string? Status { get; set; } // Pending, Sent, Rejected
         public string? TranscriptFilePath { get; set; } // Optional
         public string? NonVerificationReason { get; set; }

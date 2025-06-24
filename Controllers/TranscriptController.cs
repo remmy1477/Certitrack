@@ -49,7 +49,7 @@ namespace Certitrack.Controllers
                 }
                 else
                 {
-                    transcriptRequests = (await _transcriptRequestService.GetAllTranscriptRequestAsync()).Where(cr => cr.SchoolId == int.Parse(schoolId));
+                    transcriptRequests = (await _transcriptRequestService.GetAllTranscriptRequestAsync()).Where(cr => cr.SchoolId == int.Parse(schoolId) && cr.IsPaid);
                 }
 
                 var transcriptRequestsList = new List<TranscriptRequestIndexVM>();
@@ -77,7 +77,7 @@ namespace Certitrack.Controllers
                             MatricNumber = transcriptRequest.MatricNumber,
                             SchoolId = transcriptRequest.SchoolId,
                             SchoolName = school.Name,
-                           
+                            DestinationEmail = transcriptRequest.DestinationEmail,  
                             FacultyId = transcriptRequest.FacultyId,
                             FacultyName = faculty.Name,
                             Department = transcriptRequest.Department,
@@ -87,6 +87,7 @@ namespace Certitrack.Controllers
                             TranscriptFilePath = transcriptRequest.TranscriptFilePath,
                             Status = transcriptRequest.Status,
                             NonVerificationReason = transcriptRequest.NonVerificationReason,
+                            IsPaid = transcriptRequest.IsPaid,  
 
                         });
                     }
@@ -151,7 +152,8 @@ namespace Certitrack.Controllers
                     CreatedBy = HttpContext.Session.GetString("UserEmail") ?? "System",
                     LastModifiedBy = HttpContext.Session.GetString("UserEmail") ?? "System",
                     NonVerificationReason ="",
-                    NonApprovalReason = ""
+                    NonApprovalReason = "",
+                    IsPaid = false,
 
                 };
                 var msg = await _transcriptRequestService.InsertTranscriptRequestAsync(transcriptRequest);

@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient(); // ? Add this if missing
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -51,6 +52,9 @@ builder.Services.AddScoped<ISchoolService, SchoolService>();
 
 builder.Services.AddScoped<ITranscriptRequestRepository, TranscriptRequestRepository>();
 builder.Services.AddScoped<ITranscriptRequestService, TranscriptRequestService>();
+
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 
 

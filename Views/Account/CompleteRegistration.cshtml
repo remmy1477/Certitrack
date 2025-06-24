@@ -85,10 +85,13 @@
                                 @if (Model.TypeId != 3)
                                 {
                                     <div class="col-md-4">
-                                        @* <label asp-for="Phone" class="form-label"></label> *@
-                                        <input asp-for="OrganizationName" class="form-control" placeholder="Organization Name" />
-                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                        @* <label asp-for="Title" class="form-label">Title</label> *@
+                                        <select asp-for="OrganizationName" class="form-select" asp-items="ViewBag.Institutions">
+                                            <option value="0">-- Select Organisation --</option>
+                                        </select>
+                                        <span asp-validation-for="OrganizationName" class="text-danger"></span>
                                     </div>
+                                  
                                     <div class="col-md-4">
                                         @* <label asp-for="Phone" class="form-label"></label> *@
                                         <input asp-for="OrganizationPhone" class="form-control" placeholder="Organization Phone" />
