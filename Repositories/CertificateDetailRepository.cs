@@ -47,5 +47,10 @@ namespace Certitrack.Repositories
             _context.CertificateDetails.Update(certificateDetail);
             await _context.SaveChangesAsync();
         }
+        public async Task AddRangeAsync(List<CertificateDetail> certificateDetails)
+        {
+            _context.CertificateDetails.AddRange(certificateDetails);
+            await _context.SaveChangesAsync();
+        }
     }
 }

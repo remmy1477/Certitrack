@@ -1,4 +1,5 @@
 ﻿using Certitrack.Models;
+using Certitrack.ViewModels;
 
 namespace Certitrack.Services
 {
@@ -11,6 +12,7 @@ namespace Certitrack.Services
         Task<IEnumerable<CertificateDetail>> GetCertificateDetailByInstitutionIdAsync(long Id);
 
         Task<string> InsertCredenttialDetailAsync(CertificateDetail certificateDetail);
+        Task<string> BatchInsertAsync(List<CredentialDetailVM> credentialDetails);
 
         Task<string> UpdateCredenttialDetailAsync(CertificateDetail certificateDetail);
     }

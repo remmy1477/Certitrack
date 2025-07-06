@@ -17,6 +17,12 @@ namespace Certitrack.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddRangeAsync(List<TranscriptRequest> transcriptRequests)
+        {
+            _context.TranscriptRequests.AddRange(transcriptRequests);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<TranscriptRequest>> GetAllTranscriptRequestAsync()
         {
             return await _context.TranscriptRequests.ToListAsync();

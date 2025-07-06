@@ -11,7 +11,9 @@ namespace Certitrack.Repositories
         Task<IEnumerable<CertificateDetail>> GetCertificateDetailByInstitutionIdAsync(long Id);
 
         Task AddAsync(CertificateDetail certificateDetail);
-        
+
+        Task AddRangeAsync(List<CertificateDetail> certificateDetails);
+
         Task SaveChangesAsync();
 
         Task UpdateAsync(CertificateDetail certificateDetail);

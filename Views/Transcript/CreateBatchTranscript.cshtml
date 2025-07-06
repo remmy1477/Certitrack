@@ -1,0 +1,239 @@
+﻿@model Certitrack.ViewModels.TranscriptRequestBatchVM
+
+@{
+    ViewData["Title"] = "Batch Insert Transcript Request";
+    Layout = "_MenuLayout";
+}
+
+<div id="content" class="content">
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Batch Insert Transcript Request</a></li>
+        <li class="breadcrumb-item active">Batch Insert Transcript Request</li>
+    </ol>
+
+    <h1 class="page-header">Transcript Request <small>Batch Insert</small></h1>
+
+    <div class="col-xl-12">
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <h4 class="panel-title">Batch Insert Transcript Request</h4>
+            </div>
+
+            <div class="panel-body">
+                <div id="responseMessage" class="alert d-none"></div>
+
+                <form id="batchInsertTranscriptForm">
+                    <div id="transcriptContainer"></div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <button type="button" id="addTranscriptRow" class="btn btn-primary">Add New Record</button>
+                            <button type="submit" class="btn btn-success">Submit Batch</button>
+
+                            <div id="spinner" class="spinner-border text-primary d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let transcriptIndex = 0;
+
+        function createTranscriptRow(index) {
+            return `
+                <div class="panel panel-default p-3 mb-4" data-index="${index}">
+                    <div class="panel-heading d-flex justify-content-between">
+                        <h5 class="panel-title">Transcript Record #${index + 1}</h5>
+                        <button type="button" class="btn btn-danger btn-sm removeRow">Remove</button>
+                    </div>
+
+                    <div class="panel-body">
+                        ${generateTranscriptFormFields(index)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateTranscriptFormFields(index) {
+            return `
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">First Name</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].FirstName" class="form-control m-b-5" required placeholder="First Name" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Middle Name</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].MiddleName" class="form-control m-b-5" placeholder="Middle Name" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Last Name</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].LastName" class="form-control m-b-5" required placeholder="Last Name" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Matric No</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].MatricNumber" class="form-control m-b-5" required placeholder="Matric No" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Phone Number</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].PhoneNumber" class="form-control m-b-5" required placeholder="Phone Number" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Email</label>
+                    <div class="col-md-9">
+                        <input type="email" name="TranscriptRequests[${index}].DestinationEmail" class="form-control m-b-5" required placeholder="Email" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Address</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].Address" class="form-control m-b-5" required placeholder="Address" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">School</label>
+                    <div class="col-md-9">
+                        <select name="TranscriptRequests[${index}].SchoolId" class="form-control m-b-5" required>
+                            <option value="">-- Select School --</option>
+                            @foreach (var item in ViewBag.schools)
+                            {
+                                    <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Institution</label>
+                    <div class="col-md-9">
+                        <select name="TranscriptRequests[${index}].InstitutionId" class="form-control m-b-5" required>
+                            <option value="">-- Select Institution --</option>
+                             @foreach (var item in ViewBag.institutions)
+                             {
+                                    <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Faculty</label>
+                    <div class="col-md-9">
+                        <select name="TranscriptRequests[${index}].FacultyId" class="form-control m-b-5" required>
+                            <option value="">-- Select Faculty --</option>
+                            @foreach (var item in ViewBag.faculties)
+                            {
+                                    <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Department</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].Department" class="form-control m-b-5" required placeholder="Department" />
+                    </div>
+                </div>
+
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Year of Graduation</label>
+                    <div class="col-md-9">
+                        <input name="TranscriptRequests[${index}].YearOfGraduation" class="form-control m-b-5" required placeholder="Year of Graduation" />
+                    </div>
+                </div>
+            `;
+        }
+
+        function addTranscriptRow() {
+            $('#transcriptContainer').append(createTranscriptRow(transcriptIndex));
+            transcriptIndex++;
+        }
+
+        $(document).ready(function () {
+            addTranscriptRow();
+
+            $('#addTranscriptRow').on('click', function () {
+                addTranscriptRow();
+            });
+
+            $(document).on('click', '.removeRow', function () {
+                $(this).closest('.panel').remove();
+            });
+
+            $('#batchInsertTranscriptForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const form = $(this)[0];
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                $('#spinner').removeClass('d-none');
+
+                const formData = $(this).serializeArray();
+                const transcriptRequests = [];
+
+                formData.forEach(item => {
+                    const match = item.name.match(/TranscriptRequests\[(\d+)\]\.(.+)/);
+                    if (match) {
+                        const index = parseInt(match[1]);
+                        const key = match[2];
+
+                        if (!transcriptRequests[index]) transcriptRequests[index] = {};
+                        transcriptRequests[index][key] = item.value;
+                    }
+                });
+
+                fetch('@Url.Action("CreateBatchTranscript", "Transcript")', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ TranscriptRequests: transcriptRequests })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        $('#spinner').addClass('d-none');
+                        const messageDiv = $('#responseMessage');
+
+                        if (data.success) {
+                            messageDiv.removeClass('d-none alert-danger').addClass('alert alert-success').text(data.message);
+                            $('#transcriptContainer').empty();
+                            transcriptIndex = 0;
+                            addTranscriptRow();
+                        } else {
+                            messageDiv.removeClass('d-none alert-success').addClass('alert alert-danger').text(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        $('#spinner').addClass('d-none');
+                        console.error('Error:', error);
+                        $('#responseMessage').removeClass('d-none alert-success').addClass('alert alert-danger').text('An unexpected error occurred.');
+                    });
+            });
+        });
+    </script>
+}

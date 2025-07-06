@@ -134,12 +134,7 @@ namespace Certitrack.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(new { success = false, message = "Invalid login data" });
 
-            bool isFreeEmail = FreeEmailRegex.IsMatch(model.Email);
-            if (isFreeEmail)
-            {
-                var domain = model.Email.Split('@').Last().ToLower();
-                return BadRequest(new { success = false, message = $"Emails from '{domain}' are not allowed. Please use your organization's email address." });
-            }
+           
 
             if (!ValidEmailFormatRegex.IsMatch(model.Email))
             {
@@ -157,7 +152,19 @@ namespace Certitrack.Controllers
 
             //Password@123
             var user = await _userService.AuthenticateAsync(model.Email, HashPassword(model.Password));
+          
+                if (user !=null && user.RoleId != 3 && user.RoleId != 7)
+                {
+
+                    bool isFreeEmail = FreeEmailRegex.IsMatch(model.Email);
+                    if (isFreeEmail)
+                    {
+                        var domain = model.Email.Split('@').Last().ToLower();
+                        return BadRequest(new { success = false, message = $"Emails from '{domain}' are not allowed. Please use your organization's email address." });
+                    }
+                }
             
+
             if (user != null && user.IsActive)
             {
                 var invite = (await _userRegistrationInviteService.GetAlllUserRegistrationInvitesAsync())
@@ -174,7 +181,7 @@ namespace Certitrack.Controllers
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
                 HttpContext.Session.SetString("InstitutionType", invite?.TypeId?.ToString() ?? string.Empty);
                 HttpContext.Session.SetString("SchoolId", invite?.SchoolId?.ToString() ?? string.Empty);
-               // HttpContext.Session.SetString("InstitutionId", invite?.Co ?? string.Empty);
+                HttpContext.Session.SetString("InstitutionId", invite?.OrganizationName ?? string.Empty);
                 return Ok(new { success = true, message = "Login successful" });
             }
 
@@ -251,12 +258,17 @@ namespace Certitrack.Controllers
 
             // var emailDomain = model.Email.Split('@').Last().ToLower();
 
-            bool isFreeEmail = FreeEmailRegex.IsMatch(model.Email);
-            if (isFreeEmail)
+            if(model.RoleId !=7)
             {
-                var domain = model.Email.Split('@').Last().ToLower();
-                return BadRequest(new { success = false, message = $"Emails from '{domain}' are not allowed. Please use your organization's email address." });
+                bool isFreeEmail = FreeEmailRegex.IsMatch(model.Email);
+                if (isFreeEmail)
+                {
+                    var domain = model.Email.Split('@').Last().ToLower();
+                    return BadRequest(new { success = false, message = $"Emails from '{domain}' are not allowed. Please use your organization's email address." });
+                }
             }
+
+           
 
             if (!ValidEmailFormatRegex.IsMatch(model.Email))
             {

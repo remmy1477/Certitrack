@@ -117,7 +117,11 @@ namespace Certitrack.Controllers
                     TempData["Message"] = "Payment failed or cancelled.";
                 }
 
-                return RedirectToAction("Index", "Credential");
+                if (type == "C")
+
+                    return RedirectToAction("Index", "Credential");
+                else
+                    return RedirectToAction("Index", "Transcript");
             }
             catch (Exception ex)
             {

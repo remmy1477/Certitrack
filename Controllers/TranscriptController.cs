@@ -36,23 +36,37 @@ namespace Certitrack.Controllers
             {
                 int pageSize = 10;
                 int pageNumber = page ?? 1;
-                IEnumerable<TranscriptRequest> transcriptRequests;
 
-                
+                var alltranscripts = await _transcriptRequestService.GetAllTranscriptRequestAsync(); 
+                           
 
                 string institutionType = HttpContext?.Session?.GetString("InstitutionType") ?? string.Empty;
                 string schoolId = HttpContext?.Session?.GetString("SchoolId") ?? "0";
+                string institutionId = HttpContext?.Session?.GetString("InstitutionId") ?? "0";
+                string roleName = HttpContext?.Session?.GetString("UserRoleName");
+                var UserEmail = HttpContext?.Session?.GetString("UserEmail");
 
-                if (string.IsNullOrEmpty(schoolId) || schoolId == "0")
+                IEnumerable<TranscriptRequest> transcriptRequests =  Enumerable.Empty<TranscriptRequest>();
+
+                if (roleName == "SuperAdmin" || roleName == "AdminUser")
                 {
-                    transcriptRequests = await _transcriptRequestService.GetAllTranscriptRequestAsync();
+                    transcriptRequests = alltranscripts;
                 }
-                else
+                else if(roleName == "Student" || roleName == "Agent")
+                { 
+                    transcriptRequests = alltranscripts.Where(tr => tr.CreatedBy == UserEmail);
+                }    
+                else if (schoolId != "0")
                 {
-                    transcriptRequests = (await _transcriptRequestService.GetAllTranscriptRequestAsync()).Where(cr => cr.SchoolId == int.Parse(schoolId) && cr.IsPaid);
+                    transcriptRequests = alltranscripts.Where(tr => tr.SchoolId == long.Parse(schoolId));
+                }
+                else if (institutionId != "0")
+                {
+                    transcriptRequests = alltranscripts.Where(tr => tr.InstitutionId == long.Parse(institutionId));
                 }
 
                 var transcriptRequestsList = new List<TranscriptRequestIndexVM>();
+
                 if (transcriptRequests == null || !transcriptRequests.Any())
                 {
                     TempData["Message"] = "No Transcript Request found.";
@@ -281,6 +295,38 @@ namespace Certitrack.Controllers
             }
 
             return Ok(new { success = true });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateBatchTranscript()
+        {
+            try
+            {
+                var schools = await _schoolService.GetAllSchoolsAsync();
+                var institutions = await _institutionService.GetAllInstitutionsAsync();
+                var faculties = await _faculyService.GetAllFacultyAsync();
+
+                ViewBag.Schools = schools;
+                ViewBag.Institutions = institutions;
+                ViewBag.Faculties = faculties;
+
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View(ex);
+            }
+            
+        }
+
+            [HttpPost]
+        public async Task<IActionResult> CreateBatchTranscript([FromBody] TranscriptRequestBatchVM batchVM)
+        {
+            var resultMessage = await _transcriptRequestService.BatchInsertAsync(batchVM.TranscriptRequests);
+
+            bool isSuccess = !resultMessage.StartsWith("Error");
+            return Json(new { success = isSuccess, message = resultMessage });
         }
 
 

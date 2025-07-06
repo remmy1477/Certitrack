@@ -1,5 +1,6 @@
 ﻿using Certitrack.Models;
- 
+using Certitrack.ViewModels;
+
 namespace Certitrack.Services
 {
     public interface ITranscriptRequestService
@@ -11,6 +12,8 @@ namespace Certitrack.Services
         Task<IEnumerable<TranscriptRequest>> GetTranscriptRequestByInstitutionIdAsync(long Id);
 
         Task<string> InsertTranscriptRequestAsync(TranscriptRequest transcriptRequest);
+
+        Task<string> BatchInsertAsync(List<TranscriptRequestVM> transcriptRequests);
 
         Task<string> UpdateTranscriptRequestAsync(TranscriptRequest transcriptRequest);
     }

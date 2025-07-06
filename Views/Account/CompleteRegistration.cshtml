@@ -78,12 +78,12 @@
                                 </div>
 
                                 <!-- Group: Personal Information -->
-                                <div class="col-12">
-                                    <h5>Organisation Information</h5>
-                                    <hr />
-                                </div>
-                                @if (Model.TypeId != 3)
+                                @if (Model.TypeId != 3 && Model.TypeId != 7)
                                 {
+                                    <div class="col-12">
+                                        <h5>Organisation Information</h5>
+                                        <hr />
+                                    </div>
                                     <div class="col-md-4">
                                         @* <label asp-for="Title" class="form-label">Title</label> *@
                                         <select asp-for="OrganizationName" class="form-select" asp-items="ViewBag.Institutions">
@@ -91,7 +91,7 @@
                                         </select>
                                         <span asp-validation-for="OrganizationName" class="text-danger"></span>
                                     </div>
-                                  
+
                                     <div class="col-md-4">
                                         @* <label asp-for="Phone" class="form-label"></label> *@
                                         <input asp-for="OrganizationPhone" class="form-control" placeholder="Organization Phone" />
@@ -125,6 +125,11 @@
                                 }
                                 else if (Model.TypeId == 3)
                                 {
+                                    <div class="col-12">
+                                        <h5>Organisation Information</h5>
+                                        <hr />
+                                    </div>
+
                                     <input type="hidden" asp-for="OrganizationName" />
                                     <input type="hidden" asp-for="OrganizationPhone" />
                                     <input type="hidden" asp-for="OrganizationEmail" />
@@ -139,6 +144,25 @@
                                             <option value="0">-- Select School --</option>
                                         </select>
                                         <span asp-validation-for="SchoolId" class="text-danger"></span>
+                                    </div>
+
+                                }
+                                else if (Model.TypeId == 7)
+                                {
+                                    <input type="hidden" asp-for="OrganizationName" value="0"/>
+                                    <input type="hidden" asp-for="OrganizationPhone" />
+                                   @*  <input type="hidden" asp-for="OrganizationEmail" /> *@
+                                    <input type="hidden" asp-for="RCNo" />
+                                    <input type="hidden" asp-for="ITNo" />
+                                    <input type="hidden" asp-for="ITNo" />
+                                    <input type="hidden" asp-for="BNNo" />
+                                    <input type="hidden" asp-for="OrganizationAddress" />
+                                    <input type="hidden" asp-for="SchoolId" value="0"/>
+
+                                    <div class="col-md-4">
+                                        @* <label asp-for="Phone" class="form-label"></label> *@
+                                        <input asp-for="OrganizationEmail" class="form-control" placeholder="Organization Email" />
+                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
                                     </div>
 
                                 }

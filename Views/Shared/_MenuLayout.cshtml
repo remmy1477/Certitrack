@@ -109,28 +109,28 @@
 					@if (userRoleName == "SuperAdmin" || userRoleName == "AdminUser")
 					{
 						<li><a href="/Account/Index"><i class="fa fa-user"></i> <span>User  Account Management</span></a></li>
-						<li><a href="/Credential/Index"><i class="fa fa-image"></i> <span>Insert Credential Detail</span></a></li>
+						<li><a href="/Credential/Index"><i class="fa fa-image"></i> <span>Authenticate Certificate</span></a></li>
 						@* <li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li> *@
-						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Request Transcript</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Authenticate Transcript</span></a></li>
 					}
 					@if (userRoleName == "VerifierUser")
                     {
-						<li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li>
-						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Request Transcript</span></a></li>
+						<li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Certificate</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Verify Transcript</span></a></li>
                     }
 
 					@if (userRoleName == "VerifierApproval")
 					{
 						@* <li><a href="/home/uploadcredential"><i class="fa fa-image"></i> <span>Upload Credential</span></a></li> *@
-						<li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Credential</span></a></li>
-						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Request Transcript</span></a></li>
+						<li><a href="/Credential/Index"><i class="fa fa-calendar"></i> <span>Verify Certificate</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Verify Transcript</span></a></li>
 					}
 
-					@if (userRoleName == "Agent" || userRoleName == "Requester")
+					@if (userRoleName == "Agent" || userRoleName == "Requester" || userRoleName == "Student")
 					{
-						
-						<li><a href="/Credential/Index"><i class="fa fa-image"></i> <span>View Credential Detail</span></a></li>
-						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>View Transcript</span></a></li>
+
+						<li><a href="/Credential/Index"><i class="fa fa-image"></i> <span>Authenticate Certificate</span></a></li>
+						<li><a href="/Transcript/Index"><i class="fa fa-align-left"></i> <span>Authenticate Transcript</span></a></li>
 					}
 					
 	

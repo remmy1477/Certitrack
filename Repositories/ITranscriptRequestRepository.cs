@@ -12,6 +12,8 @@ namespace Certitrack.Repositories
 
         Task AddAsync(TranscriptRequest transcriptRequest);
 
+        Task AddRangeAsync(List<TranscriptRequest> transcriptRequests);
+
         Task SaveChangesAsync();
 
         Task UpdateAsync(TranscriptRequest transcriptRequest);

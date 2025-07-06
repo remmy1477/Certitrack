@@ -95,13 +95,16 @@ public class HomeController : Controller
         //    return View(model);
 
         // var emailDomain = model.Email.Split('@').Last().ToLower();
-
-        bool isFreeEmail = FreeEmailRegex.IsMatch(email);
-        if (isFreeEmail)
+        if (role != "7")
         {
-            var domain = email.Split('@').Last().ToLower();
-            return BadRequest(new { success = false, message = $"Emails from '{domain}' are not allowed. Please use your organization's email address." });
+            bool isFreeEmail = FreeEmailRegex.IsMatch(email);
+            if (isFreeEmail)
+            {
+                var domain = email.Split('@').Last().ToLower();
+                return BadRequest(new { success = false, message = $"Emails from '{domain}' are not allowed. Please use your organization's email address." });
+            }
         }
+        
 
         if (!ValidEmailFormatRegex.IsMatch(email))
         {
