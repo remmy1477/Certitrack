@@ -11,7 +11,14 @@ namespace Certitrack.Repositories
         public SchoolRepository(AppDbContext context)
         {
             _context = context;
-        }   
+        }
+
+        public async Task AddAsync(School school)
+        {
+            _context.Schools.Add(school);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<School>> GetAllSchoolsAsync()
         {
             return await _context.Schools.ToListAsync();    

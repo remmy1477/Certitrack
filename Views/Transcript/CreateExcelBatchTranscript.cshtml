@@ -1,0 +1,152 @@
+﻿
+@{
+	ViewData["Title"] = "Bulk Transcript  Detail Upload Page";
+	Layout = "_MenuLayout";
+}
+
+<body>
+
+	<!-- begin #content -->
+	<div id="content" class="content">
+		<!-- begin breadcrumb -->
+		<ol class="breadcrumb float-xl-right">
+			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+			<li class="breadcrumb-item"><a href="javascript:;">Bulk Transcript Detail Upload</a></li>
+			<li class="breadcrumb-item active">Bulk Transcript Detail Upload</li>
+		</ol>
+		<!-- end breadcrumb -->
+		<!-- begin page-header -->
+		<h1 class="page-header">Transcript Detail <small></small></h1>
+		<!-- end page-header -->
+
+		<div class="col-xl-12">
+			<!-- begin panel -->
+			<div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+				<!-- begin panel-heading -->
+				<div class="panel-heading">
+					<h4 class="panel-title">Bulk Transcript Detail Upload</h4>
+					<div class="panel-heading-btn">
+					</div>
+				</div>
+				<!-- end panel-heading -->
+				<!-- begin panel-body -->
+				<div class="panel-body">
+					@if (ViewBag.Message != null)
+					{
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							@ViewBag.Message
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					}
+
+
+					<form asp-action="CreateExcelBatchTranscript" asp-controller="Transcript" method="post" enctype="multipart/form-data">
+
+
+						@if (!ViewData.ModelState.IsValid)
+						{
+							@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+						}
+
+						<div class="form-group row mb-4">
+							<label class="col-md-3 col-form-label">Select File</label>
+							<div class="col-md-7">
+								<input type="file" name="file" class="form-control" accept=".csv,.xlsx,.xls" required />
+							</div>
+							<div class="col-md-2">
+								<button type="submit" class="btn btn-success">Upload</button>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-12 text-muted">
+								<p class="small">
+									Acceptable formats: <strong>.csv</strong>, <strong>.xlsx</strong> <br />
+									Download sample:
+									<a asp-controller="Transcript" asp-action="ExportTranscriptXlsxTemplate" class="text-primary">
+										Sample Excel
+									</a>
+								</p>
+							</div>
+						</div>
+
+
+						@* <div class="form-group row m-b-15">
+							<label class="col-form-label col-md-3"></label>
+							<div class="col-md-9">
+								<!-- Trigger Disclaimer Modal -->
+								<button type="button" class="btn btn-warning btn-lg m-r-5" data-toggle="modal" data-target="#disclaimerModal">
+									Read Disclaimer
+								</button>
+
+								<!-- Submit Button (disabled by default) -->
+								<button id="submitBtn" type="submit" class="btn btn-primary btn-lg" disabled>
+									Submit
+								</button>
+							</div>
+						</div> *@
+
+
+					</form>
+				</div>
+				<!-- end panel-body -->
+			</div>
+			<!-- end panel -->
+
+		</div>
+
+	</div>
+	<!-- end #content -->
+
+	<div class="modal fade" id="disclaimerModal" tabindex="-1" role="dialog" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="disclaimerModalLabel">Disclaimer</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						Note: I <span id="fullNamePlaceholder" class="font-weight-bold text-primary">........................................................</span> aver that in the event that any of the above
+						information is found to be wrong or incorrect, the Certitrack shall not be held liable for any action or damages
+						that arises from the reliance on the same. I understand that the information supplied above forms the fundamental
+						basis upon which verification will be done and I will be solely responsible for any mishap. I certify that I have
+						obtained and submitted to Certitrack all the requisite information from my client and I have my client’s
+						authority to carry out the verification.
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button id="acceptDisclaimerBtn" type="button" class="btn btn-success" data-dismiss="modal">
+						I Understand & Accept
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+
+
+@section Scripts {
+	<!-- JavaScript to enable submit button -->
+	<script>
+		$('#disclaimerModal').on('show.bs.modal', function () {
+			//alert('disclamer');
+				const firstName = $('#HolderFirstName').val().trim();
+				const middleName = $('#HolderMiddleName').val().trim();
+				const lastName = $('#HolderLastName').val().trim();
+
+				const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+				$('#fullNamePlaceholder').text(fullName || "........................................................");
+			});
+
+		document.getElementById('acceptDisclaimerBtn').addEventListener('click', function () {
+			document.getElementById('submitBtn').disabled = false;
+		});
+	</script>
+
+	
+}
+

@@ -25,6 +25,11 @@
         public bool IsActive { get; set; } = false;
         public string? ApprovalToken { get; set; }  // Used for secure approval links
 
-        
+        public int FailedLoginAttempts { get; set; }
+        public DateTime? LockoutEnd { get; set; }
+
+        public bool IsLocked => LockoutEnd.HasValue && LockoutEnd > DateTime.UtcNow;
+
+
     }
 }

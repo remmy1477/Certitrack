@@ -1,9 +1,16 @@
 using Certitrack.Data;
 using Certitrack.Repositories;
 using Certitrack.Services;
+using Certitrack.Services.Certitrack.Services;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -56,6 +63,13 @@ builder.Services.AddScoped<ITranscriptRequestService, TranscriptRequestService>(
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
+builder.Services.AddScoped<ISchoolTypeRepository, SchoolTypeRepository>();
+builder.Services.AddScoped<ISchoolTypeService, SchoolTypeService>();
+
+
 
 
 builder.Services.AddSession(options =>
@@ -65,7 +79,12 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+
+
 var app = builder.Build();
+
+// Set EPPlus License (for version 8+)
+//ExcelPackage.License = new EPPlusLicense(LicenseType.NonCommercial);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -44,6 +44,9 @@
                         <a asp-action="CreateBatchTranscript" class="btn btn-primary">
                             <i class="fas fa-user-plus"></i>Batch Insert Transcript Request
                         </a>
+                        <a asp-action="CreateExcelBatchTranscript" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>Batch Upload Transcipt Detail Through Spreadshett
+                        </a>
                     </div>
 
                 }
@@ -109,28 +112,28 @@
                                       
                                         <td>@transcriptRequest.Status</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detailsModal_@transcriptRequest.Id">
+                                            <button type="button" class="btn btn-sm btn-info btn-view-detail" data-toggle="modal" data-target="#detailsModal_@transcriptRequest.Id">
                                                 View Detail
                                             </button>
                                             @if (userRole == "SuperAdmin")
                                             {
-                                                <a asp-action="Edit" asp-route-id="@transcriptRequest.Id" class="btn btn-sm btn-warning">Edit</a>
-                                                <a asp-action="Delete" asp-route-id="@transcriptRequest.Id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                                                <a asp-action="Edit" asp-route-id="@transcriptRequest.Id" class="btn btn-sm btn-warning btn-edit-transcript">Edit</a>
+                                                <a asp-action="Delete" asp-route-id="@transcriptRequest.Id" class="" btn btn-sm btn-danger btn-delete-transcript" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                                             }
                                             else if (userRole == "VerifierUser")
                                             {
                                                 @* <button class="btn btn-success verify-btn" data-id="@transcriptRequest.Id">Verify</button> *@
                                                 <button class="btn btn-sm btn-info verify-btn" data-toggle="modal" data-target="#verifyModal" data-id="@transcriptRequest.Id">Verify Transcript</button>
-                                                <button class="btn btn-danger not-verified-btn" data-toggle="modal" data-target="#notVerifiedModal" data-id="@transcriptRequest.Id">Transcript Not Verified</button>
+                                                <button class="btn btn-sm btn-danger not-verified-btn" data-toggle="modal" data-target="#notVerifiedModal" data-id="@transcriptRequest.Id">Transcript Not Verified</button>
                                             }
                                             else if (userRole == "VerifierApproval")
                                             {
                                                 bool isVerify = transcriptRequest.Status == "Verified"?true:false; // Assuming this is set in your ViewModel
 
-                                                
+
 
                                                 <button class="btn btn-sm btn-success send-btn" data-toggle="modal" data-target="#sendModal" data-id="@transcriptRequest.Id" @(isVerify ? "" : "disabled")>Transcript Record Found. Click to Send Email </button>
-                                                <button class="btn btn-danger notfound-btn" data-toggle="modal" data-target="#notFoundModal" data-id="@transcriptRequest.Id" @(isVerify ? "" : "disabled")>Transcript Not Found. Click to Send Email</button>
+                                                <button class="btn btn-sm btn-danger not-verified-btn" data-toggle="modal" data-target="#notFoundModal" data-id="@transcriptRequest.Id" @(isVerify ? "" : "disabled")>Transcript Not Found. Click to Send Email</button>
                                               
                                             }
 
@@ -365,11 +368,11 @@
             </div>
             <div class="modal-body">
                 <p>
-                    You agree to indemnify, defend, and hold harmless Certitrack Global Solution Limited [Certitrack], its affiliates, officers, directors, employees, agents, and licensors from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney’s fees) arising from:
+                    You agree to indemnify, defend, and hold harmless Certitrack Global Solution Limited [Certitrack], its affiliates, officers, directors, employees, agents, and licensors from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney’s fees) arising from: obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney’s fees) arising from:
                 </p>
                 <ul>
                     <li>
-                        Users’ reliance on the information provided and supplied by you to them via Certitrack’s digital platform..
+                        Users’ reliance on the information provided and supplied by you to them via Certitrack’s digital platform.
                     </li>
                     <li>Your violation of any term of the terms of service and usage of the digital platform.</li>
                 </ul>
@@ -515,8 +518,9 @@
                 });
             });
 
-            // Submit "Transcript Not Verified" form
+            // Submit "Transcript Not Verified" form 
             $('#notVerifiedForm').on('submit', function (e) {
+           // $('#notFoundIndemnityAcknowledgeBtn').on('submit', function (e) {
                 e.preventDefault();
 
                 var requestId = $('#notVerifiedRequestId').val();
@@ -656,7 +660,7 @@
                 console.log('Not Verified Indemnity acknowledged');
 
                 // Enable the Not Verified submit button
-                $('#sendNotificationBtn').prop('disabled', false).removeAttr('disabled');
+                $('#submitNotVerifiedBtn').prop('disabled', false).removeAttr('disabled');
 
                 // Close the indemnity modal
                 $('#notVerifiedIndemnityModal').modal('hide');

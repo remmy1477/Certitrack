@@ -6,5 +6,7 @@ namespace Certitrack.Services
     {
         Task<IEnumerable<School>> GetAllSchoolsAsync();
         Task<School> GetSchoolByIdAsync(long Id);
+
+        Task<string> InsertSchoolAsync(School school);
     }
 }

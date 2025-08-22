@@ -5,6 +5,7 @@ using Certitrack.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
+using Certitrack.Services.Certitrack.Services;
 
 namespace Certitrack.Controllers;
 
@@ -48,11 +49,12 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost]
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    //[HttpPost]
+    //public IActionResult Privacy()
+    //{
+    //    return View();
+    //}
+    public IActionResult Privacy() => View();
 
     [HttpGet]
     public async Task<JsonResult> GetRoles()
@@ -95,7 +97,7 @@ public class HomeController : Controller
         //    return View(model);
 
         // var emailDomain = model.Email.Split('@').Last().ToLower();
-        if (role != "7")
+        if (role != "7" && role != "3" )
         {
             bool isFreeEmail = FreeEmailRegex.IsMatch(email);
             if (isFreeEmail)

@@ -1,147 +1,251 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
     Layout = "_MenuLayout";
 }
 
-<body>
-    
-	<!-- begin #content -->
-		<div id="content" class="content">
-			<!-- begin breadcrumb -->
-			<ol class="breadcrumb float-xl-right">
-				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-				<li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-				<li class="breadcrumb-item active">Dashboard</li>
-			</ol>
-			<!-- end breadcrumb -->
-			<!-- begin page-header -->
-			<h1 class="page-header">Dashboard <small></small></h1>
-			<!-- end page-header -->
-			<!-- begin row -->
-			<div class="row">
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-teal">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">TODAY'S VISITS</div>
-							<div class="stats-number">7,842,900</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 70.1%;"></div>
-							</div>
-							<div class="stats-desc">Better than last week (70.1%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-blue">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">TODAY'S PROFIT</div>
-							<div class="stats-number">180,200</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 40.5%;"></div>
-							</div>
-							<div class="stats-desc">Better than last week (40.5%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-indigo">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">NEW ORDERS</div>
-							<div class="stats-number">38,900</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 76.3%;"></div>
-							</div>
-							<div class="stats-desc">Better than last week (76.3%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-dark">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">NEW COMMENTS</div>
-							<div class="stats-number">3,988</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 54.9%;"></div>
-							</div>
-							<div class="stats-desc">Better than last week (54.9%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-			</div>
-			<!-- end row -->
-			<!-- begin row -->
-			<div class="row">
-				<!-- begin col-8 -->
-				<div class="col-xl-8">
-					<div class="widget-chart with-sidebar inverse-mode">
-						<div class="widget-chart-content bg-dark">
-							<h4 class="chart-title">
-								Visitors Analytics
-								<small>Where do our visitors come from</small>
-							</h4>
-							<div id="visitors-line-chart" class="widget-chart-full-width nvd3-inverse-mode" style="height: 260px;"></div>
-						</div>
-						<div class="widget-chart-sidebar bg-dark-darker">
-							<div class="chart-number">
-								1,225,729
-								<small>Total visitors</small>
-							</div>
-							<div class="flex-grow-1 d-flex align-items-center">
-								<div id="visitors-donut-chart" class="nvd3-inverse-mode" style="height: 180px"></div>
-							</div>
-							<ul class="chart-legend f-s-11">
-								<li><i class="fa fa-circle fa-fw text-blue f-s-9 m-r-5 t-minus-1"></i> 34.0% <span>New Visitors</span></li>
-								<li><i class="fa fa-circle fa-fw text-teal f-s-9 m-r-5 t-minus-1"></i> 56.0% <span>Return Visitors</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end col-8 -->
-				<!-- begin col-4 -->
-				<div class="col-xl-4">
-					<div class="panel panel-inverse" data-sortable-id="index-1">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								Visitors Origin
-							</h4>
-						</div>
-						<div id="visitors-map" class="bg-dark-darker" style="height: 179px;"></div>
-						<div class="list-group">
-							<a href="javascript:;" class="list-group-item list-group-item-action list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
-								1. United State 
-								<span class="badge bg-teal f-s-10">20.95%</span>
-							</a> 
-							<a href="javascript:;" class="list-group-item list-group-item-action list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
-								2. India
-								<span class="badge bg-blue f-s-10">16.12%</span>
-							</a>
-							<a href="javascript:;" class="list-group-item list-group-item-action list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
-								3. Mongolia
-								<span class="badge bg-silver-darker f-s-10">14.99%</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<!-- end col-4 -->
-			</div>
-			<!-- end row -->
-			<!-- begin row -->
-			
-		</div>
-		<!-- end #content -->
-    
-</body>
+<div id="content" class="content">
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
 
+    <h1 class="page-header">Dashboard <small>Summary</small></h1>
 
+    <!-- Filters -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label>Start Date:</label>
+            <input type="date" id="startDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label>End Date:</label>
+            <input type="date" id="endDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label>Institution:</label>
+            <select id="institutionFilter" class="form-control">
+                <option value="">All Institutions</option>
+                @foreach (var institution in ViewBag.Institutions)
+                {
+                    <option value="@institution.Id">@institution.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label>School:</label>
+            <select id="schoolFilter" class="form-control">
+                <option value="">All Schools</option>
+                @foreach (var school in ViewBag.Schools)
+                {
+                    <option value="@school.Id">@school.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3 d-flex align-items-end">
+            <button id="filterButton" class="btn btn-primary w-100">Apply Filter</button>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <div class="widget widget-stats bg-teal">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-id-badge fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">TOTAL CREDENTIAL REQUESTS</div>
+                    <div class="stats-number" id="totalCredentials">0</div>
+                    <div class="stats-desc">Up-to-date Credential Requests</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="widget widget-stats bg-blue">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">TOTAL TRANSCRIPT REQUESTS</div>
+                    <div class="stats-number" id="totalTranscripts">0</div>
+                    <div class="stats-desc">Up-to-date Transcript Requests</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="widget widget-stats bg-indigo">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-check fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">PROCESSED REQUESTS</div>
+                    <div class="stats-number" id="totalProcessed">0</div>
+                    <div class="stats-desc">Successfully Processed Requests</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row mt-4">
+        <div class="col-xl-8 col-md-12 mb-4">
+            <div class="widget-chart with-sidebar inverse-mode">
+                <div class="widget-chart-content bg-dark">
+                    <h4 class="chart-title">
+                        Request Trends
+                        <small>Credential and Transcript Over Time</small>
+                    </h4>
+                    <canvas id="lineChart" style="height: 260px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-12 mb-4">
+            <div class="widget-chart with-sidebar inverse-mode">
+                <div class="widget-chart-content bg-dark">
+                    <h4 class="chart-title text-center">Request Status</h4>
+                    <canvas id="doughnutChart" style="height: 200px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Chart Section -->
+    <div class="row mt-4">
+        <div class="col-xl-12 col-md-12 mb-4">
+            <div class="widget-chart with-sidebar inverse-mode">
+                <div class="widget-chart-content bg-dark">
+                    <h4 class="chart-title">
+                        Payment Trends
+                        <small>Payments Over Time</small>
+                    </h4>
+                    <canvas id="paymentChart" style="height: 260px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let lineChart, doughnutChart, paymentChart;
+
+        $(document).ready(function () {
+            fetchDashboardData();
+           // alert('onload dashboarddata');
+            $('#filterButton').click(function () {
+                // alert('filter button click dashboarddata');
+                fetchDashboardData();
+            });
+
+            //setInterval(fetchDashboardData, 60000);
+        });
+
+        function fetchDashboardData() {
+            let startDate = $('#startDate').val();
+            let endDate = $('#endDate').val();
+            let institutionId = $('#institutionFilter').val();
+            let schoolId = $('#schoolFilter').val();
+
+            //alert('startDate ==> '+startDate);
+            //alert('endDate ==> '+endDate);
+            //alert('institutionId ==> '+institutionId);
+            //alert('schoolId ==> '+schoolId);
+
+            $.ajax({
+                url: '@Url.Action("GetDashboardData", "Account")',
+                method: 'GET',
+                data: { startDate, endDate, institutionId, schoolId },
+                success: function (data) {
+                    $('#totalCredentials').text(data.totalCredentials);
+                    $('#totalTranscripts').text(data.totalTranscriptRequests);
+                    $('#totalProcessed').text(data.totalProcessedRequests);
+
+                    renderLineChart(data);
+                    renderDoughnutChart(data);
+                    renderPaymentChart(data);
+                },
+                error: function () {
+                    alert('Failed to load dashboard data.');
+                }
+            });
+        }
+
+        function renderLineChart(data) {
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            if (lineChart) lineChart.destroy();
+
+            lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.trendDates,
+                    datasets: [
+                        {
+                            label: 'Credential Requests',
+                            data: data.trendCredentials,
+                            borderColor: '#4e73df',
+                            fill: false
+                        },
+                        {
+                            label: 'Transcript Requests',
+                            data: data.trendTranscripts,
+                            borderColor: '#1cc88a',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'top' } }
+                }
+            });
+        }
+
+        function renderDoughnutChart(data) {
+            const ctx = document.getElementById('doughnutChart').getContext('2d');
+            if (doughnutChart) doughnutChart.destroy();
+
+            const totalPending = (data.totalCredentials + data.totalTranscriptRequests) - data.totalProcessedRequests;
+
+            doughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Processed', 'Pending'],
+                    datasets: [{
+                        data: [data.totalProcessedRequests, totalPending],
+                        backgroundColor: ['#36b9cc', '#f6c23e']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        function renderPaymentChart(data) {
+            const ctx = document.getElementById('paymentChart').getContext('2d');
+            if (paymentChart) paymentChart.destroy();
+
+            paymentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.paymentTrendDates,
+                    datasets: [
+                        {
+                            label: 'Payments Made',
+                            data: data.paymentTrendAmounts,
+                            backgroundColor: '#ff6384'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+    </script>
+}

@@ -29,5 +29,7 @@
         public long? SchoolId { get; set; } = 0;
 
         public string? activationlink { get; set; }
+
+        public string? CoverLetterPath { get; set; } = string.Empty;
     }
 }

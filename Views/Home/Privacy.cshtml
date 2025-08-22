@@ -1,6 +1,120 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
+    Layout = "_PublicLayout";// Or your homepage layout file if it's named differently
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<!-- Page Header -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+        <ol>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li>Privacy Policy</li>
+        </ol>
+      @*   <h2>Privacy Policy</h2> *@
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="inner-page">
+    <div class="container">
+        <h4 class="mb-3">CertiTrack Privacy Policy</h4>
+        <p><strong>Effective Date:</strong> 18/07/2025</p>
+
+        <p>CertiTrack ("we", "us", "our") is committed to protecting your personal information and privacy. This Privacy Policy explains how we collect, use, store, and protect your data when you use our services via <strong>www.certitrack.org</strong>. This policy aligns with the Nigeria Data Protection Act 2023 (NDPA) and other relevant laws.</p>
+
+        <h5>1. Information We Collect</h5>
+        <p><strong>A. Information You Provide:</strong></p>
+        <ul>
+            <li>Full name</li>
+            <li>Date of birth</li>
+            <li>Email address</li>
+            <li>Phone number</li>
+            <li>Learner/Registration Number</li>
+            <li>Identity documents (e.g. passport, change-of-name documents)</li>
+            <li>Qualification and academic history</li>
+            <li>Payment information (processed securely via third-party payment platforms)</li>
+        </ul>
+        <p><strong>B. Automatically Collected Data:</strong></p>
+        <ul>
+            <li>IP address</li>
+            <li>Browser and device information</li>
+            <li>Time and date of access</li>
+            <li>Actions taken on the platform (e.g. login, order history)</li>
+        </ul>
+
+        <h5>2. Purpose of Data Collection</h5>
+        <ul>
+            <li>To authenticate and verify your academic records</li>
+            <li>To process orders for replacement certificates and transcripts</li>
+            <li>To deliver digital documents</li>
+            <li>To respond to your enquiries or support requests</li>
+            <li>To detect, prevent, or investigate fraud and misuse of the portal</li>
+            <li>To improve our platform’s security, functionality, and performance</li>
+            <li>To comply with legal obligations and regulatory requests</li>
+        </ul>
+
+        <h5>3. Legal Basis for Processing</h5>
+        <ul>
+            <li>Consent – where required, especially for optional services</li>
+            <li>Performance of a contract – to fulfil your requests for certificates/transcripts</li>
+            <li>Compliance with legal obligations – e.g. for record keeping</li>
+            <li>Legitimate interest – including fraud prevention and service improvement</li>
+        </ul>
+
+        <h5>4. Data Sharing and Disclosure</h5>
+        <p>We do not sell or rent your personal data. We may share your information only with:</p>
+        <ul>
+            <li>Payment processors (e.g. Paystack)</li>
+            <li>Regulatory or government bodies where legally required</li>
+            <li>Accredited institutions or employers when documents are verified or shared by you</li>
+            <li>Service providers who support our operations under confidentiality obligations</li>
+        </ul>
+
+        <h5>5. Data Storage and Security</h5>
+        <ul>
+            <li>Your data is stored securely within Nigeria or in compliant data centres abroad under NDPA cross-border provisions.</li>
+            <li>We use encryption, firewalls, access controls, and regular audits to ensure data protection.</li>
+            <li>Access to your data is strictly restricted to authorized personnel only.</li>
+        </ul>
+
+        <h5>6. Your Rights Under the Nigeria Data Protection Act</h5>
+        <p>As a data subject under the NDPA 2023, you have the right to:</p>
+        <ul>
+            <li>Access your personal data</li>
+            <li>Rectify inaccurate or incomplete data</li>
+            <li>Withdraw consent (where consent is the basis for processing)</li>
+            <li>Request deletion (subject to legal retention requirements)</li>
+            <li>Object to certain types of processing</li>
+            <li>Request data portability in a readable format</li>
+        </ul>
+
+        <h5>7. Data Retention</h5>
+        <ul>
+            <li>We retain your data only for as long as necessary to fulfill your service requests and meet legal or regulatory obligations.</li>
+            <li>When no longer needed, your data will be securely deleted or anonymised.</li>
+        </ul>
+
+        <h5>8. Use of Cookies</h5>
+        <ul>
+            <li>Improve website performance</li>
+            <li>Enable secure login sessions</li>
+            <li>Collect analytics to enhance user experience</li>
+        </ul>
+        <p>You can adjust your browser settings to manage or block cookies.</p>
+
+        <h5>9. Children’s Privacy</h5>
+        <p>This service is intended for individuals 18 years and above. If we discover data from a person under 18, we will delete it promptly unless it is part of a valid academic record.</p>
+
+        <h5>10. Updates to This Policy</h5>
+        <p>We may update this Privacy Policy from time to time. Changes will be posted here and, where appropriate, communicated via email or portal notification.</p>
+
+        <h5>11. Contact Us</h5>
+        <p>
+            CertiTrack – Data Protection Officer<br />
+            📧 Email: <a href="mailto:info@certitrack.org">info@certitrack.org</a><br />
+            📞 Phone: +234 8086801978<br />
+            📍 Address: 2/4 Vincent Ezeh Street, Opposite Chivita 2nd Gate, Ajao Estate, Off Murtala Muhammed International Airport Road, Lagos.<br />
+            Complaints may also be directed to the Nigeria Data Protection Commission (NDPC): <a href="https://www.ndpc.gov.ng" target="_blank">www.ndpc.gov.ng</a>
+        </p>
+    </div>
+</section>

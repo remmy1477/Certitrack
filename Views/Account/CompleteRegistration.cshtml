@@ -32,7 +32,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         }
-                        <form asp-action="CompleteRegistration" method="post" novalidate>
+                        <form asp-action="CompleteRegistration" method="post" enctype="multipart/form-data" novalidate>
                             @Html.AntiForgeryToken()
 
                             <input type="hidden" asp-for="Email" />
@@ -78,8 +78,12 @@
                                 </div>
 
                                 <!-- Group: Personal Information -->
-                                @if (Model.TypeId != 3 && Model.TypeId != 7)
+                                @if (Model.TypeId != 3)
                                 {
+                                    
+
+                                    <input type="hidden" name="CoverLetter" value="" />
+                                    <input type="hidden" name="CoverLetterPath" value="" />
                                     <div class="col-12">
                                         <h5>Organisation Information</h5>
                                         <hr />
@@ -95,7 +99,7 @@
                                     <div class="col-md-4">
                                         @* <label asp-for="Phone" class="form-label"></label> *@
                                         <input asp-for="OrganizationPhone" class="form-control" placeholder="Organization Phone" />
-                                        @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
+                                        <span asp-validation-for="OrganizationPhone" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-4">
                                         @* <label asp-for="Phone" class="form-label"></label> *@
@@ -122,16 +126,27 @@
                                         <input asp-for="OrganizationAddress" class="form-control" placeholder="Organization Address" />
                                         @*  <span asp-validation-for="Phone" class="text-danger"></span> *@
                                     </div>
+                                    @if (Model.TypeId == 6)
+                                    {
+                                        <div class="form-group col-md-12">
+                                            <label asp-for="CoverLetter">Cover Letter</label>
+                                            <input asp-for="CoverLetter" type="file" class="form-control" accept=".pdf,.doc,.docx" />
+                                            <span asp-validation-for="CoverLetter" class="text-danger"></span>
+                                        </div>
+
+                                    }
                                 }
                                 else if (Model.TypeId == 3)
                                 {
+                                    <input type="hidden" name="CoverLetter" value="" />
+                                    <input type="hidden" name="CoverLetterPath" value="" />
                                     <div class="col-12">
                                         <h5>Organisation Information</h5>
                                         <hr />
                                     </div>
 
                                     <input type="hidden" asp-for="OrganizationName" />
-                                    <input type="hidden" asp-for="OrganizationPhone" />
+                                    <input type="hidden" asp-for="OrganizationPhone" value="000003456" />
                                     <input type="hidden" asp-for="OrganizationEmail" />
                                     <input type="hidden" asp-for="RCNo" />
                                     <input type="hidden" asp-for="ITNo" />
@@ -158,6 +173,8 @@
                                     <input type="hidden" asp-for="BNNo" />
                                     <input type="hidden" asp-for="OrganizationAddress" />
                                     <input type="hidden" asp-for="SchoolId" value="0"/>
+                                    <input type="hidden" name="CoverLetter" value="" />
+                                    <input type="hidden" name="CoverLetterPath" value="" />
 
                                     <div class="col-md-4">
                                         @* <label asp-for="Phone" class="form-label"></label> *@
@@ -173,17 +190,39 @@
                                     <hr />
                                 </div>
                               
-                                <div class="col-md-4">
-                                    @* <label asp-for="Password" class="form-label"></label> *@
+                               @*  <div class="col-md-4">
+                                     <label asp-for="Password" class="form-label"></label> 
                                     <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div> 
+                                
+
+                                <div class="col-md-4">
+                                   
+                                    <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="ConfirmPassword" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>*@
+
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input asp-for="Password" class="form-control" type="password" placeholder="Password" id="passwordInput" />
+                                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                            <i class="fa fa-eye" id="togglePasswordIcon"></i>
+                                        </button>
+                                    </div>
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-4">
-                                    @* <label asp-for="ConfirmPassword" class="form-label"></label> *@
-                                    <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="ConfirmPassword" />
+                                    <div class="input-group">
+                                        <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" id="confirmPasswordInput" />
+                                        <button type="button" class="btn btn-outline-secondary" id="toggleConfirmPassword">
+                                            <i class="fa fa-eye" id="toggleConfirmPasswordIcon"></i>
+                                        </button>
+                                    </div>
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
+
                                
                             </div>
 
@@ -285,5 +324,27 @@
             check.checked = true;
             submit.disabled = false;
         });
+    </script>
+    <script>
+        function setupPasswordToggle(inputId, buttonId, iconId) {
+            document.getElementById(buttonId).addEventListener("click", function () {
+                const input = document.getElementById(inputId);
+                const icon = document.getElementById(iconId);
+
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("fa-eye");
+                    icon.classList.add("fa-eye-slash");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("fa-eye-slash");
+                    icon.classList.add("fa-eye");
+                }
+            });
+        }
+
+        // Initialize toggles
+        setupPasswordToggle("passwordInput", "togglePassword", "togglePasswordIcon");
+        setupPasswordToggle("confirmPasswordInput", "toggleConfirmPassword", "toggleConfirmPasswordIcon");
     </script>
 }

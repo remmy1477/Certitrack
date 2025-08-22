@@ -96,37 +96,52 @@
 							</div>
 						</div>*@
 						<div class="form-group row m-b-15">
-							<label asp-for="InstitutionId" class="col-form-label col-md-3">Requesting Organization </label>
-							<div class="col-md-9">
+							<label asp-for="InstitutionId" class="col-form-label col-md-3">Requesting Organisation </label>
+							<div class="col-md-7">
 								<select asp-for="InstitutionId" class="form-control m-b-5" asp-items='new SelectList(ViewBag.institutions, "Id", "Name")'>
 									<option value="">-- Select Institution --</option>
 								</select>
 								<span asp-validation-for="InstitutionId" class="text-danger"></span>
 							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-sm btn-success" onclick="addNewItem('InstitutionId')">+ Add</button>
+							</div>
 						</div>
 						<div class="form-group row m-b-15">
 							<label asp-for="SchoolId" class="col-form-label col-md-3">Institution</label>
-							<div class="col-md-9">
+							<div class="col-md-7">
 								<select asp-for="SchoolId" class="form-control m-b-5" asp-items='new SelectList(ViewBag.schools, "Id", "Name")'>
 									<option value="">-- Select School --</option>
 								</select>
 								<span asp-validation-for="SchoolId" class="text-danger"></span>
 							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-sm btn-success" onclick="addNewItem('SchoolId')">+ Add</button>
+							</div>
 						</div>
 						<div class="form-group row m-b-15">
 							<label asp-for="FacultyId" class="col-form-label col-md-3">Faculty/School/College</label>
-							<div class="col-md-9">
+							<div class="col-md-7">
 								<select asp-for="FacultyId" class="form-control m-b-5" asp-items='new SelectList(ViewBag.faculties, "Id", "Name")'>
 									<option value="">-- Select Faculty/School/College --</option>
 								</select>
 								<span asp-validation-for="FacultyId" class="text-danger"></span>
 							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-sm btn-success" onclick="addNewItem('Faculty')">+ Add</button>
+							</div>
 						</div>
 						<div class="form-group row m-b-15">
 							<label asp-for="Department" class="col-form-label col-md-3">Department</label>
-							<div class="col-md-9">
-								<input asp-for="Department" class="form-control m-b-5" placeholder="Department" />
+							<div class="col-md-7">
+								@* <input asp-for="Department" class="form-control m-b-5" placeholder="Department" /> *@
+								<select asp-for="Department" class="form-control m-b-5" asp-items='new SelectList(ViewBag.Departments, "Name", "Name")'>
+									<option value="">-- Select Department --</option>
+								</select>
 								<span asp-validation-for="Department" class="text-danger"></span>
+							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-sm btn-success" onclick="addNewItem('Department')">+ Add</button>
 							</div>
 						</div>
 						
@@ -136,6 +151,13 @@
 							<div class="col-md-9">
 								<input asp-for="YearOfGraduation" class="form-control m-b-5" placeholder="Year Of Graduation" />
 								<span asp-validation-for="YearOfGraduation" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group row m-b-15">
+							<label asp-for="StudentEmail" class="col-form-label col-md-3">Student Email</label>
+							<div class="col-md-9">
+								<input asp-for="StudentEmail" class="form-control m-b-5" placeholder="Destination Email" />
+								<span asp-validation-for="StudentEmail" class="text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group row m-b-15">
@@ -184,7 +206,7 @@
 				</div>
 				<div class="modal-body">
 					<p>
-						Note: I ........................................................ aver that in the event that any of the above
+						Note: I <span id="fullNamePlaceholder" class="font-weight-bold text-primary">........................................................</span> aver that in the event that any of the above
 						information is found to be wrong or incorrect, the Certitrack shall not be held liable for any action or damages
 						that arises from the reliance on the same. I understand that the information supplied above forms the fundamental
 						basis upon which verification will be done and I will be solely responsible for any mishap. I certify that I have
@@ -201,12 +223,162 @@
 		</div>
 	</div>
 
+	<!-- Add Item Modal -->
+	<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<form id="addItemForm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add New <span id="itemTypeName"></span></h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div id="institutionTypeGroup" class="form-group d-none">
+							<label for="institutionTypeId">Institution Type</label>
+							<select id="institutionTypeId" class="form-control">
+								<option value="">-- Select Type --</option>
+								@foreach (var type in ViewBag.InstitutionTypes)
+								{
+									<option value="@type.Id">@type.Name</option>
+								}
+							</select>
+						</div>
+						<div id="schoolTypeGroup" class="form-group d-none">
+							<label for="schoolTypeId">School Type</label>
+							<select id="schoolTypeId" class="form-control">
+								<option value="">-- Select Type --</option>
+								@foreach (var type in ViewBag.SchoolTypes)
+								{
+									<option value="@type.Id">@type.Name</option>
+								}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="itemName">Name</label>
+							<input type="text" class="form-control" id="itemName" required />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </body>
 
 </div>
-<!-- JavaScript to enable submit button -->
+<!-- JavaScript to enable submit button 
 <script>
 	document.getElementById('acceptDisclaimerBtn').addEventListener('click', function () {
 		document.getElementById('submitBtn').disabled = false;
 	});
-</script>
+</script>-->
+
+@section Scripts {
+	<!-- JavaScript to enable submit button -->
+	<script>
+		$('#disclaimerModal').on('show.bs.modal', function () {
+			//alert('disclamer');
+				const firstName = $('#FirstName').val().trim();
+				const middleName = $('#MiddleName').val().trim();
+				const lastName = $('#LastName').val().trim();
+
+				const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+				$('#fullNamePlaceholder').text(fullName || "........................................................");
+			});
+
+		document.getElementById('acceptDisclaimerBtn').addEventListener('click', function () {
+			document.getElementById('submitBtn').disabled = false;
+		});
+	</script>
+
+	<script>
+
+		function capitalizeFirstLetter(string) {
+			if (!string) return '';
+			if (string.toLowerCase().endsWith('Id')) {
+				string = string.slice(0, -2);
+			}
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+
+		let currentType = '';
+
+		function addNewItem(type) {
+			currentType = type;
+			//alert('currentType '+currentType)
+			const label = capitalizeFirstLetter(type);
+			$('#itemTypeName').text(label);
+			//alert(type);
+			if (type.toLowerCase() === 'institutionid') {
+				$('#institutionTypeGroup').removeClass('d-none');
+			} else {
+				$('#institutionTypeGroup').addClass('d-none');
+			}
+
+			if (type.toLowerCase() === 'schoolid') {
+				$('#schoolTypeGroup').removeClass('d-none');
+			} else {
+				$('#schoolTypeGroup').addClass('d-none');
+			}
+
+			$('#itemName').val('');
+			$('#addItemModal').modal('show');
+		}
+
+		$('#addItemForm').submit(function (e) {
+			e.preventDefault();
+
+			const name = $('#itemName').val();
+			const institutionTypeId = $('#institutionTypeId').val();
+			const schoolTypeId = $('#schoolTypeId').val();
+
+			let url = '';
+			const dropdownId = `#${currentType}`;
+
+			switch (currentType.toLowerCase()) {
+				case 'institutionid':
+					url = '/Lookup/CreateInstitution';
+					break;
+				case 'schoolid':
+					url = '/Lookup/CreateSchool';
+					break;
+				case 'faculty':
+					url = '/Lookup/CreateFaculty';
+					break;
+				case 'department':
+					url = '/Lookup/CreateDepartment';
+					break;
+				case 'degree':
+					url = '/Lookup/CreateQualificationType';
+					break;
+				case 'degreeclass':
+					url = '/Lookup/CreateQualificationClass';
+					break;
+			}
+
+			const data = { name };
+			if (currentType.toLowerCase() === 'institutionid') {
+				data.institutionTypeId = institutionTypeId;
+				//alert('assign point institution '+data.institutionTypeId);
+			}
+			if (currentType.toLowerCase() === 'schoolid') {
+				data.schoolTypeId = schoolTypeId;
+				//alert('assign point school '+data.schoolTypeId);
+			}
+
+			$.post(url, data)
+				.done(function (response) {
+					$(dropdownId).append(new Option(response.name, response.id, true, true));
+					$('#addItemModal').modal('hide');
+				})
+				.fail(function () {
+					alert('Failed to add item. Check if it already exists.');
+				});
+		});
+
+	</script>
+}
+

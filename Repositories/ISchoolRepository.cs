@@ -6,5 +6,7 @@ namespace Certitrack.Repositories
     {
         Task<IEnumerable<School>> GetAllSchoolsAsync();
         Task<School> GetSchoolByIdAsync(long Id);
+
+        Task AddAsync(School school);
     }
 }

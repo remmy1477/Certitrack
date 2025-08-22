@@ -6,5 +6,7 @@ namespace Certitrack.Repositories
     {
         Task<IEnumerable<QualificationType>> GetAllQualificationTypeAsync();
         Task<QualificationType> GetQualificationTypeByIdAsync(long Id);
+
+        Task AddAsync(QualificationType qualificationType);
     }
 }

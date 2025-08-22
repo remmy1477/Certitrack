@@ -12,7 +12,9 @@ namespace Certitrack.ViewModels
         public string HolderEmail { get; set; }
         public string HolderPhoneNumber { get; set; }
         public string HolderAddress { get; set; }
-        public string CertificateNo { get; set; }
+        public string CertificateNo { get; set; } = string.Empty;
+
+        public string MatricNo { get; set; } = string.Empty;
 
         public long Degree { get; set; }
 

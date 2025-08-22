@@ -19,5 +19,19 @@ namespace Certitrack.Services
         {
             return await _schoolRepository.GetSchoolByIdAsync(Id);  
         }
+
+        public async Task<string> InsertSchoolAsync(School school)
+        {
+            try
+            {
+                await _schoolRepository.AddAsync(school);
+                return "School Detail Inserted";
+            }
+            catch (Exception ex)
+            {
+                // Optionally log the exception: _logger.LogError(ex, "Error inserting credential detail");
+                return "error";
+            }
+        }
     }
 }

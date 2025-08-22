@@ -85,7 +85,7 @@ namespace Certitrack.Services
             try
             {
                 await _certificateDetailRepository.AddAsync(certificateDetail);
-                return "Creadential Detail Inserted";
+                return "Certificate Detail Inserted ";
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace Certitrack.Services
             try
             {
                 await _certificateDetailRepository.UpdateAsync(certificateDetail);
-                return "Creadential Detail Updated";
+                return "Certificate Detail Updated";
             }
             catch (Exception ex)
             {

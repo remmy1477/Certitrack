@@ -28,6 +28,8 @@ namespace Certitrack.Data
         public DbSet<CertificateDetail> CertificateDetails { get; set; }
 
         public DbSet<Faculty> Faculties { get; set; }
+
+        public DbSet<Department> Departments { get; set; }
         public DbSet<QualificationType> QualificationTypes { get; set; }
         public DbSet<QualificationClass> QualificationClasses { get; set; }
 

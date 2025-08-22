@@ -12,6 +12,13 @@ namespace Certitrack.Repositories
         {
             _context = context;
         }
+
+        public async Task AddAsync(Faculty faculty)
+        {
+            _context.Faculties.AddAsync(faculty);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Faculty>> GetAllFacultyAsync()
         {
             return await _context.Faculties.ToListAsync();

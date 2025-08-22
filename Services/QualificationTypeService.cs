@@ -11,6 +11,22 @@ namespace Certitrack.Services
         {
             _qualificationTypeRepository = qualificationTypeRepository;
         }
+
+        public async Task<string> AddAsync(QualificationType qualificationType)
+        {
+            try
+            {
+                await _qualificationTypeRepository.AddAsync(qualificationType);
+                return "Qualification Type Detail Inserted";
+            }
+            catch (Exception ex)
+            {
+                // Optionally log the exception: _logger.LogError(ex, "Error inserting faculty detail");
+                return "error";
+            }
+
+        }
+
         public async Task<IEnumerable<QualificationType>> GetAllQualificationTypeAsync()
         {
             return await _qualificationTypeRepository.GetAllQualificationTypeAsync();

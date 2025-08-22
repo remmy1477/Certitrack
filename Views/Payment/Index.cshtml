@@ -1,0 +1,430 @@
+﻿@model X.PagedList.IPagedList<Certitrack.ViewModels.PaymentVM>
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@{
+    ViewData["Title"] = "Payment Record List";
+    Layout = "_MenuLayout"; // Make sure this matches your layout
+    var userRole = Context.Session.GetString("UserRoleName");
+    //bool isVerify = Model.IsVerified; // set this in your ViewModel/controller
+}
+
+<div id="content" class="content">
+
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Payment Detail</li>
+    </ol>
+
+    <h1 class="page-header">Payment Records <small>List of Payments</small></h1>
+
+    <div class="col-xl-12">
+        <div class="panel panel-inverse" data-sortable-id="table-basic-1">
+            <div class="panel-heading">
+                <h4 class="panel-title">Payment Detail Table</h4>
+                <div class="panel-heading-btn">
+                    <a asp-action="ExportInvites" class="btn btn-sm btn-success">Download CSV</a>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["Message"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+              @*   @if (userRole != "VerifierUser" && userRole != "VerifierApproval")
+                {
+                    <div class="mb-3 text-end">
+                        <a asp-action="Create" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>Insert Certificate Detail
+                        </a>
+                        <a asp-action="CreateBatchCredential" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>Batch Insert Certificate Detail
+                        </a>
+                        <a asp-action="CreateExcelBatchCredential" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>Batch Upload Certificate Detail Through Spreadshett
+                        </a>
+                    </div>
+                } *@
+                
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                               @*  <th>
+                                    @Html.ActionLink("Institution", "Index", new { sortOrder = ViewBag.InstitutionIdSortParm, page = Model.PageNumber })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("School", "Index", new { sortOrder = ViewBag.SchoolIdSortParm, page = Model.PageNumber })
+                                </th> *@
+                                @* <th>Created</th>
+                 <th>Expires</th> *@
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Payment Type</th>
+                                <th>Currency</th>
+                                <th>Amount</th>
+                                <th>Paid Status</th>
+                                <th>Date</th> 
+                                <th>Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                int sn = (Model.PageNumber - 1) * Model.PageSize + 1;
+                                foreach (var payment in Model)
+                                {
+                                    <tr>
+                                        <td>@sn</td>
+                                        <td>@payment.FullName</td>
+                                        <td>@payment.Email</td>
+                                        @*<td>@certificate.InstitutionNm</td>
+                                        <td>@certificate.SchoolNm</td>
+                                         <td>@user.Created.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td>@user.ExpiresAt.ToString("yyyy-MM-dd HH:mm")</td> 
+                                        <td>@($"{certificate.HolderFirstName} {certificate.HolderMiddleName} {certificate.HolderLastName}".Trim())</td>*@
+
+                                        <td>@(payment.PaymentType == "C" ? "Certificate" : "Transcript")</td>
+                                        
+                                        <td>@payment.Currency</td>
+                                        <td>@payment.Amount</td>
+                                        <td>
+                                            @if (payment.Paid)
+                                            {
+                                                <span class="badge bg-success">Paid</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            }
+                                        </td>
+                                        <td>@payment.TransactionDate.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info">
+                                                View Detail
+                                            </button>
+                                            
+
+                                        </td>
+                                        
+                                       @*  <td>@certificate.Status</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detailsModal_@certificate.Id">
+                                                View Detail
+                                            </button>
+                                            @if (userRole == "SuperAdmin")
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@certificate.Id" class="btn btn-sm btn-warning">Edit</a>
+                                                <a asp-action="Delete" asp-route-id="@certificate.Id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                                            }
+                                            else if (userRole == "VerifierUser")
+                                            {
+                                                <button class="btn btn-success verify-btn" data-id="@certificate.Id">Verify</button>
+                                            }
+                                            else if (userRole == "VerifierApproval")
+                                            {
+                                                bool isVerify = certificate.IsVerified; // Assuming this is set in your ViewModel
+                                                @* <button class="btn btn-success confirm-btn" data-id="@certificate.Id">Credential Confirmed Authentic</button>
+                                                <button class="btn btn-danger reject-btn" data-id="@certificate.Id">Credential Not Authentic</button> *@
+                                               @*  <button class="btn btn-success confirm-btn" data-id="@certificate.Id" @(isVerify ? "" : "disabled")>
+                                                    Credential Confirmed Authentic
+                                                </button>
+                                                <button class="btn btn-danger reject-btn" data-id="@certificate.Id" @(isVerify ? "" : "disabled")>
+                                                    Credential Not Authentic
+                                                </button>
+                                            }
+
+                                        </td> *@
+                                    </tr>
+
+                                   @*  <div class="modal fade" id="detailsModal_@certificate.Id" tabindex="-1" role="dialog" aria-labelledby="detailsLabel_@certificate.Id" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="detailsLabel_@certificate.Id">Certificate Detail</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-4">Institution</dt>
+                                                        <dd class="col-sm-8">@certificate.InstitutionNm</dd>
+
+                                                        <dt class="col-sm-4">School</dt>
+                                                        <dd class="col-sm-8">@certificate.SchoolNm</dd>
+
+                                                        <dt class="col-sm-4">Faculty/College/School</dt>
+                                                        <dd class="col-sm-8">@certificate.FacultyNm</dd>
+
+                                                        <dt class="col-sm-4">Department</dt>
+                                                        <dd class="col-sm-8">@certificate.Department</dd>
+
+                                                     <dt class="col-sm-4">Degree Type</dt>
+                                                        <dd class="col-sm-8">@certificate.DegreeNm</dd>
+
+                                                        <dt class="col-sm-4">Degree Class</dt>
+                                                        <dd class="col-sm-8">@certificate.DegreeClassNm</dd>
+
+                                                        <dt class="col-sm-4">Full Name</dt>
+                                                        <dd class="col-sm-8">@($"{certificate.HolderFirstName} {certificate.HolderMiddleName} {certificate.HolderLastName}".Trim())</dd>
+
+                                                        <dt class="col-sm-4">Phone</dt>
+                                                        <dd class="col-sm-8">@certificate.HolderPhoneNumber</dd>
+
+                                                        <dt class="col-sm-4">Certificate No</dt>
+                                                        <dd class="col-sm-8">@certificate.CertificateNo</dd>
+
+                                                        <dt class="col-sm-4">Year of Graduation</dt>
+                                                        <dd class="col-sm-8">@certificate.YearOfGraduation</dd>
+
+                                                        <dt class="col-sm-4">Status</dt>
+                                                        <dd class="col-sm-8">@certificate.Status</dd>
+
+                                                        <dt class="col-sm-4">Verified</dt>
+                                                        <dd class="col-sm-8">
+                                                            @if (certificate.IsVerified)
+                                                            {
+                                                                <span class="badge badge-success">Yes</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge badge-warning">No</span>
+                                                            }
+                                                        </dd>
+                                                        <dt class="col-sm-4">Payment Status</dt>
+                                                        <dd class="col-sm-8">
+                                                            @if (certificate.Ispaid)
+                                                            {
+                                                                <span class="badge badge-success">Paid</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge badge-warning">Pending Payment</span>
+                                                            }
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> *@
+
+
+                                    sn++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center">No Paymet Record found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }), new PagedListRenderOptions()
+                   {
+                       LiElementClasses = new[] { "page-item" },
+                       PageClasses = new[] { "page-link" },
+                       UlElementClasses = new[] { "pagination" }
+                   })
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ajaxIndemnityModal" tabindex="-1" role="dialog" aria-labelledby="ajaxIndemnityModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ajaxIndemnityModalLabel">Indemnity for Schools/Universities/Institutions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    You agree to indemnify, defend, and hold harmless Certitrack Global Solution Limited [Certitrack], its affiliates, officers, directors, employees, agents, and licensors from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney’s fees) arising from:
+                </p>
+                <ul>
+                    <li>
+                        Users’ reliance on the information provided and supplied by you to them via Certitrack’s digital platform..
+                    </li>
+                    <li>Your violation of any term of the terms of service and usage of the digital platform.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="indemnityAcknowledgeBtn" class="btn btn-success">I Acknowledge</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <script src="https://js.paystack.co/v1/inline.js"></script> *@
+@section Scripts {
+   
+    <script>
+        // For VerifierUser - Verify
+        // $('.verify-btn').on('click', function () {
+        //     const certificateId = $(this).data('id');
+        //     $.ajax({
+        //         url: '/Credential/Verify', // Update as per your controller route
+        //         method: 'POST',
+        //         data: { id: certificateId },
+        //         success: function (response) {
+        //             alert(response.message || "Verification recorded.");
+        //             location.reload();
+        //         },
+        //         error: function () {
+        //             alert("Error verifying certificate.");
+        //         }
+        //     });
+        // });
+
+        $(document).ready(function () {
+            let selectedCertificateId = null; // Hold the clicked ID
+
+            // When verify button is clicked, show indemnity modal first
+            $(document).on('click', '.verify-btn', function () {
+                selectedCertificateId = $(this).data('id'); // Store ID for later use
+                $('#ajaxIndemnityModal').modal('show'); // Show indemnity modal
+            });
+
+            // Handle indemnity acknowledgment
+            $(document).on('click', '#indemnityAcknowledgeBtn', function () {
+                // Hide the indemnity modal
+                $('#ajaxIndemnityModal').modal('hide');
+
+                // Proceed with AJAX request
+                $.ajax({
+                    url: '/Credential/Verify', // Update as per your controller route
+                    method: 'POST',
+                    data: { id: selectedCertificateId },
+                    success: function (response) {
+                        alert(response.message || "Verification recorded.");
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Error verifying certificate.");
+                    }
+                });
+            });
+        });
+
+        // $('.confirm-btn, .reject-btn').on('click', function () {
+        //     if ($(this).prop('disabled')) return;
+
+        //     const certificateId = $(this).data('id');
+        //     const isConfirm = $(this).hasClass('confirm-btn');
+        //     const url = isConfirm ? '/Credential/ConfirmAuthentic' : '/Credential/RejectCredential';
+        //     const message = isConfirm ? "Credential confirmed as authentic." : "Credential marked as not authentic.";
+
+        //     $.ajax({
+        //         url: url,
+        //         method: 'POST',
+        //         data: { id: certificateId },
+        //         success: function (response) {
+        //             alert(response.message || message);
+        //             location.reload();
+        //         },
+        //         error: function () {
+        //             alert("Error processing request.");
+        //         }
+        //     });
+        // });
+
+         $(document).ready(function () {
+            let selectedCertificateId = null;
+            let selectedUrl = '';
+            let selectedMessage = '';
+
+            // Handle click on confirm or reject buttons
+            $(document).on('click', '.confirm-btn, .reject-btn', function () {
+                if ($(this).prop('disabled')) return;
+
+                selectedCertificateId = $(this).data('id');
+                const isConfirm = $(this).hasClass('confirm-btn');
+
+                selectedUrl = isConfirm ? '/Credential/ConfirmAuthentic' : '/Credential/RejectCredential';
+                selectedMessage = isConfirm ? "Credential confirmed as authentic." : "Credential marked as not authentic.";
+
+                // Show indemnity modal
+                $('#ajaxIndemnityModal').modal('show');
+            });
+
+            // Handle indemnity acknowledgment
+            $(document).on('click', '#indemnityAcknowledgeBtn', function () {
+                // Close the indemnity modal
+                $('#ajaxIndemnityModal').modal('hide');
+
+                // Proceed with AJAX request
+                $.ajax({
+                    url: selectedUrl,
+                    method: 'POST',
+                    data: { id: selectedCertificateId },
+                    success: function (response) {
+                        alert(response.message || selectedMessage);
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Error processing request.");
+                    }
+                });
+            });
+        });
+
+
+    </script>
+
+    <script>
+                $(document).ready(function () {
+            $('.pay-btn').click(function () {
+                const btn = $(this);
+                const credentialId = btn.data('id');
+                const email = btn.data('email');
+                const fullName = btn.data('name');
+                const amount = btn.data('amount');
+                const type = btn.data('type');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Payment/Initialize',
+                    data: {
+                        id: credentialId,
+                        email: email,
+                        amount: amount,
+                        name: fullName, // Add comma here
+                        type: type
+                    },
+                    success: function (response) {
+                        if (response && response.status && response.data && response.data.authorization_url) {
+                            window.location.href = response.data.authorization_url;
+                        } else {
+                            alert('Error: Could not initiate payment.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error initiating payment.');
+                    }
+                });
+            });
+        });
+
+       
+        
+    </script>
+}

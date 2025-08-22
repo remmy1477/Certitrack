@@ -12,6 +12,7 @@
         public long FacultyId { get; set; }
         public string Department { get; set; }
         public string YearOfGraduation { get; set; }
+        public string StudentEmail { get; set; } = string.Empty; // Optional, can be empty if not provided
         public string DestinationEmail { get; set; }
         public string? Status { get; set; } // Pending, Sent, Rejected
 

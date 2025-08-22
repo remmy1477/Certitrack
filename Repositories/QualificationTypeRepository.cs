@@ -11,7 +11,14 @@ namespace Certitrack.Repositories
         public QualificationTypeRepository(AppDbContext context)
         {
             _context = context;
-        }   
+        }
+
+        public async Task AddAsync(QualificationType qualificationType)
+        {
+            _context.QualificationTypes.AddAsync(qualificationType);
+            await _context.SaveChangesAsync();
+        }
+
         public  async Task<IEnumerable<QualificationType>> GetAllQualificationTypeAsync()
         {
             return await _context.QualificationTypes.ToListAsync();

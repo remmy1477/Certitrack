@@ -20,5 +20,19 @@ namespace Certitrack.Services
         {
             return await _institutionRepository.GetInstitutionByIdAsync(Id);    
         }
+
+        public async Task<string> InsertInstitutionAsync(Institution institution)
+        {
+            try
+            {
+                await _institutionRepository.AddAsync(institution);
+                return "Organisation Detail Inserted";
+            }
+            catch (Exception ex)
+            {
+                // Optionally log the exception: _logger.LogError(ex, "Error inserting credential detail");
+                return "error";
+            }
+        }
     }
 }
