@@ -1,0 +1,163 @@
+﻿@{
+    Layout = null;
+    var title = ViewData["Title"] ?? "Certitrack";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title - Certitrack</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <style>
+        /* ===== BRAND COLORS ===== */
+        :root {
+            --primary-gold: #C19D52;
+            --primary-navy: #0B3155;
+            --dark-navy: #071E34;
+            --off-white: #F9F9F9;
+            --charcoal: #333333;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--charcoal);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: #ffffff !important;
+        }
+
+            .navbar .navbar-brand {
+                color: var(--blue-primary) !important;
+                font-weight: 700;
+                font-size: 1.3rem;
+            }
+
+            .navbar .nav-link {
+                color: var(--charcoal) !important;
+                font-weight: 500;
+            }
+
+            .navbar .nav-link:hover {
+                 color: var(--blue-primary) !important;
+                 text-decoration: none;
+            }
+                /* ACTIVE LINK */
+                .navbar .nav-link.active {
+                    color: var(--blue-primary) !important;
+                    font-weight: 600;
+                    text-decoration: none !important; /* remove underline */
+                }
+               
+
+        /* BUTTONS */
+        .btn-primary {
+            background-color: var(--primary-gold);
+            border-color: var(--primary-gold);
+            color: #fff;
+        }
+
+            .btn-primary:hover {
+                background-color: #9A793C;
+                border-color: #9A793C;
+            }
+
+        .btn-outline-primary {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--primary-gold);
+                color: #fff;
+            }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--dark-navy);
+        }
+
+            footer a {
+                color: var(--primary-gold) !important;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+
+    @RenderSection("Styles", required: false)
+</head>
+<body class="landing-page">
+
+    <!-- ===== HEADER ===== -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-shield-alt"></i> Certitrack
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#landingNavbar"
+                    aria-controls="landingNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="landingNavbar">
+                <ul class="navbar-nav ml-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#how-it-works">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#contact">Contact</a></li>
+
+                    <li class="nav-item mr-3">
+                        <a href="javascript:void(0);" class="btn btn-login" onclick="openModal()">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0);" class="btn btn-get-started"
+                           onclick="openOnboardingModal()"
+                           style="background-color:#2c4964; border-color:#2c4964; color:#fff;">
+                            Get Started
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main role="main" class="pt-5 mt-4">
+        @RenderBody()
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="text-white text-center py-4 mt-5">
+        <div class="container">
+            <div class="mb-2">
+                <a href="#features" class="mx-2">Features</a> |
+                <a href="#about" class="mx-2">About</a> |
+                <a href="#contact" class="mx-2">Contact</a>
+            </div>
+            <p class="mb-0">&copy; @DateTime.Now.Year - Certitrack. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

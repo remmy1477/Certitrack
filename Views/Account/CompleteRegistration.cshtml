@@ -56,13 +56,13 @@
 
                                 <div class="col-md-4">
                                     @* <label asp-for="FirstName" class="form-label"></label> *@
-                                    <input asp-for="FirstName" class="form-control" placeholder="FirstName" />
+                                    <input asp-for="FirstName" id="FirstName" class="form-control" placeholder="FirstName" />
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-4">
                                     @* <label asp-for="LastName" class="form-label"></label> *@
-                                    <input asp-for="LastName" class="form-control" placeholder="LastName" />
+                                    <input asp-for="LastName" id="LastName" class="form-control" placeholder="LastName" />
                                     <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
 
@@ -258,7 +258,7 @@
                 </button>
             </div>
             <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-                <p>
+                @* <p>
                     <strong>DISCLAIMER FOR USERS OF THE DIGITAL PLATFORM</strong><br /><br />
                     BY USING THIS PLATFORM, YOU ACKNOWLEDGE AND AGREE THAT:
                 </p>
@@ -274,7 +274,45 @@
                         CertiTrack shall not be held liable for any damages resulting from the use of or reliance on any content,
                         information, or services provided by the school/university through the platform.
                     </li>
-                </ol>
+                </ol> *@
+                @if (Model.TypeId == 6)
+                {
+                    <p>
+                        Note: I, <span id="disclaimerName">__________</span>, hereby declare and warrant that all information
+                        provided above is true, accurate, and complete to the best of my knowledge. I acknowledge that CertiTrack
+                        shall not be held liable for any loss, damage, claim, or action arising from reliance on any incorrect,
+                        false, or misleading information supplied by me.
+                    </p>
+                    <p>
+                        I accept full legal and financial responsibility for any errors, omissions, or misrepresentations in the information provided.
+                        I further certify that I have obtained all necessary authorisations from my client to submit their information for verification,
+                        and that I am duly authorised to act on their behalf for this purpose.
+                    </p>
+                    <p>
+                        By clicking <strong>"Complete Registration"</strong>, I expressly agree to be bound by the terms of this disclaimer.
+                    </p>
+                }
+
+                else
+                {
+                    <p>
+                        <strong>DISCLAIMER FOR USERS OF THE DIGITAL PLATFORM</strong><br /><br />
+                        BY USING THIS PLATFORM, YOU ACKNOWLEDGE AND AGREE THAT:
+                    </p>
+                    <ol type="a">
+                        <li>
+                            The information provided and obtained on the platform is directly from the university/college/institution.
+                            While CertiTrack strives to ensure that the content is obtained directly from the university/college/institution,
+                            no guarantees are made regarding the completeness, accuracy, reliability, suitability of any information,
+                            content, or materials found on or through the platform as it does not have any input and cannot edit or retain
+                            the information which moves directly from the university/college/institution to the user.
+                        </li>
+                        <li>
+                            CertiTrack shall not be held liable for any damages resulting from the use of or reliance on any content,
+                            information, or services provided by the school/university through the platform.
+                        </li>
+                    </ol>
+                }
             </div>
             <div class="modal-footer">
                 @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> *@
@@ -347,4 +385,24 @@
         setupPasswordToggle("passwordInput", "togglePassword", "togglePasswordIcon");
         setupPasswordToggle("confirmPasswordInput", "toggleConfirmPassword", "toggleConfirmPasswordIcon");
     </script>
+    <script>
+        function updateDisclaimerName() {
+            const first = document.getElementById("FirstName")?.value.trim() || "";
+           // const middle = document.getElementById("MiddleName")?.value.trim() || "";
+            const last = document.getElementById("LastName")?.value.trim() || "";
+
+            let fullName = [first, middle, last].filter(Boolean).join(" ");
+            document.getElementById("disclaimerName").textContent = fullName || "__________";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            ["FirstName", "LastName"].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener("input", updateDisclaimerName);
+                }
+            });
+        });
+    </script>
+
 }

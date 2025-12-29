@@ -518,6 +518,9 @@ namespace Certitrack.Controllers
             var payments = await _paymentService.GetAllPaymentAsync();
             var transcriptPayments = payments.Where(p => p.PaymentType == "T").ToList();
             var credentialPayments = payments.Where(p => p.PaymentType == "C").ToList();
+            var totalCredentialPayments = credentialPayments.Sum(p => p.Amount);
+            var totalTranscriptPayments = transcriptPayments.Sum(p => p.Amount);
+            var totalPayments = payments.Sum(p => p.Amount); // Total payments across all types  
 
             // 🔑 Restrict data by role (before any filters)
             if (!(roleName == "SuperAdmin" || roleName == "AdminUser"))
@@ -526,14 +529,20 @@ namespace Certitrack.Controllers
                 {
                     totalCredentials = totalCredentials.Where(c => c.SchoolId == schoolIdFromSession).ToList();
                     totalTranscriptRequests = totalTranscriptRequests.Where(t => t.SchoolId == schoolIdFromSession).ToList();
-                   
-                   // payments = payments.Where(p => p.SchoolId == schoolIdFromSession).ToList();
+
+                    totalCredentialPayments = totalCredentials.ToList().Count() * 200000;
+                    totalTranscriptPayments = totalTranscriptRequests.ToList().Count() * 300000;
+                    totalPayments = totalCredentialPayments + totalTranscriptPayments; // Assuming PaymentAmount is a property in CertificateDetail
+                    // Assuming PaymentAmount is a property in CertificateDetail
                 }
                 else // Institution-based role
                 {
                     totalCredentials = totalCredentials.Where(c => c.InstitutionId == institutionIdFromSession).ToList();
                     totalTranscriptRequests = totalTranscriptRequests.Where(t => t.InstitutionId == institutionIdFromSession).ToList();
-                  //  payments = payments.Where(p => p.InstitutionId == institutionIdFromSession).ToList();
+                    // payments = payments.Where(p => p.InstitutionId == institutionIdFromSession).ToList();
+                    totalCredentialPayments = totalCredentials.ToList().Count() * 200000;
+                    totalTranscriptPayments = totalTranscriptRequests.ToList().Count() * 300000;
+                    totalPayments = totalCredentialPayments + totalTranscriptPayments; // Assuming PaymentAmount is a property in CertificateDetail
                 }
             }
 
@@ -612,6 +621,12 @@ namespace Certitrack.Controllers
                 totalTranscriptRequests = totalTranscriptRequests.Count(),
                 totalProcessedRequests = processedRequests,
                 trendDates = trendDates.Select(d => d.ToString("yyyy-MM-dd")).ToList(),
+
+                totalCredentialPayments,
+                totalTranscriptPayments,
+                totalPayments, // Total payments across all types  
+
+
                 trendCredentials,
                 trendTranscripts,
                 paymentTrendDates,

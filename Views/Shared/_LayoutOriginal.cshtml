@@ -60,20 +60,15 @@
         .modal-content {
             background: #fff;
             padding: 30px;
-            border-radius: 30px;
+            border-radius: 8px;
             width: 100%;
-            max-width: 600px;
+            max-width: 400px;
             position: relative;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             animation: fadeIn 0.3s ease-in-out;
         }
 
             .modal-content h2 {
-                margin-top: 0;
-                text-align: center
-            }
-
-            .modal-content h3 {
                 margin-top: 0;
                 text-align: center
             }
@@ -99,7 +94,7 @@
 
         .close-btn {
             /* position: absolute; */
-            width: 30px;
+            width:30px;
             top: 10px;
             right: 15px;
             font-size: 20px;
@@ -124,83 +119,14 @@
         .onboarding-modal-content {
             background: white;
             padding: 30px;
-            border-radius: 30px;
+            border-radius: 10px;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             position: relative;
         }
 
-            .onboarding-modal-content h3 {
-                margin-top: 0;
-                text-align: center
-            }
 
-        <!-- HEADER :: replace your current block with this -->
-        /* Scoped to this header only */
-        #landing-header #navbar ul {
-            margin-bottom: 0;
-        }
-
-        #landing-header #navbar ul li {
-            list-style: none;
-        }
-
-        #landing-header #navbar .nav-link {
-            color: #0B3155 !important; /* base link color */
-            text-decoration: none !important; /* kill underline */
-            border-bottom: none !important; /* kill active underline bars */
-            padding: .5rem .75rem;
-        }
-
-            #landing-header #navbar .nav-link.active,
-            #landing-header #navbar .nav-link:focus,
-            #landing-header #navbar .nav-link:hover {
-                color: #2c4964 !important; /* brand blue on hover/active */
-                text-decoration: none !important;
-                border-bottom: none !important;
-            }
-            /* Some themes draw pseudo underlines—turn them off */
-            #landing-header #navbar .nav-link::before,
-            #landing-header #navbar .nav-link::after {
-                display: none !important;
-                content: none !important;
-            }
-
-        /* Get Started button (brand blue) */
-        #landing-header .btn-get-started {
-            background-color: #2c4964 !important;
-            border-color: #2c4964 !important;
-            color: #fff !important;
-            padding: .5rem 1rem;
-            border-radius: .3rem;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-            #landing-header .btn-get-started:hover,
-            #landing-header .btn-get-started:focus {
-                background-color: #203648 !important; /* slightly darker */
-                border-color: #203648 !important;
-                color: #fff !important;
-            }
-
-        /* Optional: make Login outline match brand blue */
-        #landing-header .btn-login {
-            border-color: #2c4964 !important;
-            color: #2c4964 !important;
-        }
-
-            #landing-header .btn-login:hover,
-            #landing-header .btn-login:focus {
-                background-color: #2c4964 !important;
-                color: #fff !important;
-            }
-
-
-        .section-title1 {
-            text-align: center;
-            padding-bottom: 0px;
-        }
+        
     </style>
 
 </head>
@@ -223,109 +149,106 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center justify-content-between" id="landing-header">
-            <h1 class="logo me-auto">
-                <a asp-controller="Home" asp-action="Index">
-                    <img src="~/assets/img/CerttiLogo.png" alt="Certitrack" class="img-fluid" style="height:70px; width:200px;">
-                </a>
-            </h1>
+        <div class="container d-flex align-items-center">
+
+            <h1 class="logo me-auto"><a href="index.html"><img src="assets/img/Certti.jpg" style="height80px; width:150px;" alt="" class="img-fluid"></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul class="d-flex align-items-center">
+                <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#services">How It Works</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About Us</a></li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li>
-                        <a href="javascript:void(0);" class="btn btn-login ml-lg-3 mr-2"
-                           onclick="openModal()"
-                           style="border:none; background:none; color:#2c4964; padding: 0; font-weight:500;">
-                            Login
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="btn btn-get-started"
-                           onclick="openOnboardingModal()"
-                           style="background-color:#2c4964; border-color:#2c4964; color:#fff; border-radius:.7rem;">
-                            Get Started
-                        </a>
-                    </li>
                 </ul>
-            </nav>
+                <i class="nav-link scrollto"><a href="javascript:void(0);" class="btn-get-started scrollto" onclick="openModal()">Login</a></i>
+                <i class="nav-link scrollto"><a href="#" class="appointment-btn scrollto scrollto" onclick="openOnboardingModal()">Get Started</a></i>
+            </nav><!-- .navbar -->
 
-        </div>
+           @*  <a href="javascript:void(0);" class="btn-get-started scrollto" onclick="openModal()">Login</a>
+            <a href="#" class="appointment-btn scrollto scrollto" onclick="openOnboardingModal()">Get Started</a>
 
 
-
+        </div> *@
     </header><!-- End Header -->
-    @RenderBody()
+    @* <div class="container">
+        <main role="main" class="pb-3"> *@
+            @RenderBody()
+        @* </main>
+    </div> *@
 
     <!-- ======= Footer ======= -->
-    <footer id="hero" style="margin-top:0px;">
-
-        <div class="footer-top" style="padding: 60px 0 30px 0; background: linear-gradient(135deg, #0C3256, #1A6DBC); color: #fff; box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);">
-            <div class="container">
-                <div class="row">
-                    <div class="section-title1">
-                        <h1 style="color:#fff; margin-bottom:15px;">Ready to verify with confidence?</h1>
-                        <h3 style="font-size:17px;">Join thousands of institutions and professionals who trust CertiTrack</h3>
-                    </div>
-
-                    <div class="button-row text-center mb-5">
-                        <a href="#" class="btn-get-start scrollto"><img src="assets/img/icon/check.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">Verify Now</a>
-                        <a href="#" class="btn-get-started scrollto">See how it works</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer><!-- End Footer -->
-
     <footer id="footer">
 
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-5 col-md-6 footer-links">
-                        <h2 class="mb-3">CertiTrack</h2>
+
+                   @*  <div class="col-lg-3 col-md-6 footer-contact"> *@
+                   @*  <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Contact Info</h4>
                         <ul>
-                            <li>
-                                <a href="#">
-                                    The world's most trusted <br />
-                                    credential verification platform.
-                                </a>
-                            </li>
+                            <li><i class="bx bx-chevron-right"></i> <strong>Address:</strong>2/4 Vincent Ezeh Street, Opposite Chivita 2nd Gate Ajao Estate,Lagos State</li>
+                            <li><i class="bx bx-chevron-right"></i>  <strong>Phone:</strong> +234 8086 8019 78</li>
+                            <li><i class="bx bx-chevron-right"></i>  <strong>Email:</strong> info@certitrack.org</li>
+                        </ul>
+                       @*  <p>
+                            <strong>Address:</strong>2/4 Vincent Ezeh Street, Opposite Chivita 2nd Gate Ajao Estate,Lagos State <br>
+                            <strong>Phone:</strong> +234 8086 8019 78<br>
+                            <strong>Email:</strong> info@certitrack.org<br>
+                        </p> 
+                    </div> *@
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Contact Info</h4>
+                        <ul>
+                           
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">+234 8086 8019 78</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">info@certitrack.org</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">2/4 Vincent Ezeh Street, Opposite Chivita 2nd Gate Ajao Estate,Lagos State</a></li>
+                            @* <li><i class="bx bx-chevron-right"></i> <a href="#">Terms Of Service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> 
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+ *@
                         </ul>
                     </div>
 
                     <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Services</h4>
+                        <h4>Useful Links</h4>
                         <ul>
-                            <li>
-                                <a href="#">Certificate verification</a>
-                            </li>
-                            <li><a href="#">Transcript verification</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About Us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                          @*   <li><i class="bx bx-chevron-right"></i> <a href="#">Terms Of Service</a></li> *@
+                            @* <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> *@
+                           @*  <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li> *@
 
                         </ul>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful links</h4>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
                         <ul>
-                            <li><a href="#">Home </a></li>
-                            <li><a href="#">About Us </a></li>
-                            <li><a href="#">Services </a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Certificate Verfication Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Transcript Verification Services</a></li>
+                            
+                            @*<li><i class="bx bx-chevron-right"></i> <a href="#">Verification Service</a></li>
+                             <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> *@
                         </ul>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 footer-links">
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Legal Terms</h4>
                         <ul>
-                            <li>
-                                <a href="#">Terms Of Service</a>
-                            </li>
-                            <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms Of Service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
                         </ul>
+                        @* <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                         <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form> *@
                     </div>
 
                 </div>
@@ -336,7 +259,7 @@
 
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Certitrack Global Solutions</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>Emperor Dev</span></strong>. All Rights Reserved
                 </div>
             </div>
             @* <div class="social-links text-center text-md-right pt-3 pt-md-0">
@@ -352,17 +275,17 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-
+   
     <!-- Login Modal -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
-            <h1 class="logo text-center">
+            <h1 class="logo me-auto">
                 <a href="index.html">
-                    <img src="assets/img/CerttiLogo.png" style="height:60px; width:180px;" alt="" class="img-fluid">
+                    <img src="assets/img/Certti.jpg" style="height:80px; width:150px;" alt="" class="img-fluid">
                 </a>
             </h1>
 
-            <h3 class="mb-3">Login</h3>
+            <h2>Login</h2>
 
             <!-- Error message display -->
             <div id="loginError" style="color: red; margin-bottom: 10px; display: none;"></div>
@@ -374,7 +297,7 @@
                 <i class="bi bi-eye-slash toggle-password" id="togglePassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
             </div>
 
-            <button class="mb-5" id="loginBtn" onclick="login()">Sign In</button>
+            <button id="loginBtn" onclick="login()">Sign In</button>
 
             <!-- Optional loading indicator -->
             <div id="loginLoading" style="display: none; margin-top: 10px; color: #555;">Logging in...</div>

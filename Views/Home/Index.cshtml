@@ -3,158 +3,224 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .icon-box2 {
+        border: 1px solid #d5e1ed;
+        /* text-align: center; */
+        padding: 20px; /* optional, for spacing */
+        border-radius: 8px; /* optional, gives nice rounded corners */
+    }
+
+    .btn-get-starting {
+        font-family: "Raleway", sans-serif;
+        /* text-transform: uppercase; */
+        text-align: center;
+        margin: 0px 18%;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 1px;
+        /*display: inline-block;*/
+        padding: 2px 35px;
+        margin-top: 30px;
+        border-radius: 50px;
+        transition: 0.5s;
+        color: #fff;
+        /* background: #2c4964; */
+        background: #0C3256;
+    }
+
+    .btn-get-starto {
+        font-family: "Raleway", sans-serif;
+        text-align: center;
+        font-weight: 600;
+        font-size: 10px;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 2px 20px;
+        margin-bottom: 20px;
+        border-radius: 50px;
+        transition: 0.5s;
+        color: #fff;
+        /* background: #2c4964; */
+        background: #0C3256;
+    }
+
+    .icon-box1 {
+        border: 1px solid #d5e1ed;
+        text-align: center;
+        padding: 20px; /* optional, for spacing */
+        border-radius: 8px; /* optional, gives nice rounded corners */
+    }
+
+    .certi {
+        font-family: "Raleway", sans-serif;
+        /* text-transform: uppercase; */
+        text-align: center;
+        margin: 0px 18%;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 1px;
+        /*display: inline-block;*/
+        padding: 12px 35px;
+        margin-top: 30px;
+        border-radius: 10px;
+        transition: 0.5s;
+        color: #fff;
+        /* background: #2c4964; */
+        background: #0C3256;
+    }
+
+</style>
+
 <body>
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
         <div class="container">
-            <h1>Welcome to Certitrack</h1>
-            <h2>Your Shield against credential fraud</h2>
-            @* <a href="#about" class="btn-get-started scrollto">Get Started</a> *@
-           <a href="#" class="btn-get-started scrollto" onclick="openOnboardingModal()">Get Started</a>
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="input-group input-group-static">
+                        <a href="#" class="btn-get-starto scrollto"><img src="assets/img/icon/Group 84.png" style="height:20px; width:20px;" alt="" class="img-fluid">Trusted Verification Platform</a>
+                        <h1>
+                            Verify Credentials. <br /> Build Trust. <br /> Anywhere.
+                        </h1>
+                        <h4>
+                            Fast, secure, and effortless verification for <br />
+                            institutions, employers, and individuals. <br />
+                            Your shield against credential fraud
+                        </h4>
 
-
+                        <div class="button-row text-end mt-4">
+                            <a href="#" class="btn-get-started scrollto" onclick="openOnboardingModal()"><img src="assets/img/icon/check.png" style="height:20px; width:20px;color:#fff; margin-right:10px;" alt="" class="img-fluid">Get Started</a>
+                            <a href="#" class="btn-get-start scrollto">See how it works</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <div class="input-group input-group-static">
+                        <img src="assets/img/Certti1.png" style="height:90%; width:100%; border-radius:20px;" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
         </div>
     </section><!-- End Hero -->
-    
+
 
     <main id="main">
 
-        <!-- ======= Why Us Section ======= -->
-        <section id="why-us" class="why-us">
-            <div class="container">
+        <section id="services" class="services mt-5">
+            <div class="container mt-5">
 
-                <div class="row">
-                    <div class="col-lg-4 d-flex align-items-stretch">
-                        <div class="content">
-                            <h3>Why Choose CertiTrack?</h3>
-                            <p>
-                                <h4>Trusted Verification Engine</h4>
-                                CertiTrack uses industry-standard protocols and integrations with issuing institutions to deliver fast, accurate, and tamper-proof credential verification.
-                            </p>
-                            @* <div class="text-center">
-                                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-                            </div> *@
+                <div class="section-title text-center mt-5">
+                    <h4 style="font-weight: 400;">Trusted by Institutions in Nigeria and beyond </h4>
+                </div>
+
+                <div class="row justify-content-center mt-3">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/2.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/3.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/4.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/8.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/5.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-1 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
                         </div>
                     </div>
-                    <div class="col-lg-8 d-flex align-items-stretch">
-                        <div class="icon-boxes d-flex flex-column justify-content-center">
-                            <div class="row">
-                                <div class="col-xl-4 d-flex align-items-stretch">
-                                    <div class="icon-box mt-4 mt-xl-0">
-                                        <i class="bx bx-receipt"></i>
-                                        <h4>End-to-End Automation</h4>
-                                        <p>
-                                            From submission to confirmation, CertiTrack automates the verification lifecycle—saving time, reducing manual errors, and improving operational efficiency
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-flex align-items-stretch">
-                                    <div class="icon-box mt-4 mt-xl-0">
-                                        <i class="bx bx-cube-alt"></i>
-                                        <h4>Scalable and Secure</h4>
-                                        <p>
-                                            Built with enterprise-grade security and scalability, CertiTrack is designed to handle the needs of small organisations and large institutions alike
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-flex align-items-stretch">
-                                    <div class="icon-box mt-4 mt-xl-0">
-                                        <i class="bx bx-images"></i>
-                                        <h4>Real-Time Status Tracking</h4>
-                                        <p>
-                                            Stay informed at every stage with real-time status updates, audit trails, and clear communication between applicants and verifiers
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End .content-->
+
+                    <div class="row">
+                        <div class="col-lg-1 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/9.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/6.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/7.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/1.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-2 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                            <img src="assets/img/10.png" style="height:90%; width:100%;" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-lg-1 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="assets/img/icon/Vector.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">Bank Grade Security
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="assets/img/icon/sheild.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">GDPR Compliant
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="assets/img/icon/globe.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">Global coverage
+                    </div>
+                    <div class="col-sm-2">
                     </div>
                 </div>
 
             </div>
-        </section><!-- End Why Us Section -->
-        <!-- ======= About Section ======= -->
-        <section id="about" class="about">
-            <div class="container-fluid">
+        </section>
 
-                <div class="row">
-                  
-                   @*  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
-                        <a href="/video/CERTITRACK_VIDEO.mp4"
-                           class="glightbox play-btn mb-4"
-                           data-type="video"
-                           data-source="local"
-                           data-width="900"
-                           data-height="506">
-                        </a>
-                    </div> *@
-                    <video controls style="max-width: 40%; height: auto; border-radius: 8px;">
-                        <source src="/video/CERTITRACK_VIDEO.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-
-                    <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-                        @* <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-                        <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
- *@
-                        <div class="icon-box">
-                            <div class="icon"><i class="bx bx-fingerprint"></i></div>
-                            <h4 class="title"><a href="">Fraud Detection & Prevention</a></h4>
-                            <p class="description">
-                                Advanced algorithms help detect red flags and anomalies, helping your organisation avoid reputational and legal risks
-                            </p>
-                        </div>
-
-                        <div class="icon-box">
-                            <div class="icon"><i class="bx bx-gift"></i></div>
-                            <h4 class="title"><a href="">Seamless Integration</a></h4>
-                            <p class="description">
-                                CertiTrack easily integrates with your existing HR, academic, or onboarding systems—ensuring a smooth digital workflow
-                            </p>
-                        </div>
-
-                        <div class="icon-box">
-                            <div class="icon"><i class="bx bx-atom"></i></div>
-                            <h4 class="title"><a href="">Dedicated Support</a></h4>
-                            <p class="description">
-                                Enjoy access to a responsive support team that understands your needs and helps you get the most out of CertiTrack
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </section><!-- End About Section -->
-        
-        <!-- ======= Services Section ======= -->
         <section id="services" class="services">
             <div class="container">
 
                 <div class="section-title text-center">
-                    <h2>Services</h2>
+                    <h2>The Old Way is Broken </h2>
                     <p>
-                        CertiTrack provides secure certificate and transcript verification services,
-                        handling requests, direct validation with issuing institutions, and submission
-                        of verified transcripts on behalf of holders to requesting organisations.
+                        Traditional credential verification is slow, risky, and lacks transparency
                     </p>
                 </div>
 
                 <div class="row justify-content-center">
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                        <div class="icon-box">
-                            <div class="icon"><i class="fas fa-pills"></i></div>
-                            <h4><a href="">Certificate Verification Services</a></h4>
-                            <p>Certificate Verification Services</p>
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box" style="border: 2px solid #DC262647;">
+                            <div class="icon"><img src="assets/img/icon/clock-three.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Slow and manual processes</a></h4>
+                            <p>
+                                Weeks of back-and-forth emails <br />
+                                and phone calls
+                            </p>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                        <div class="icon-box">
-                            <div class="icon"><i class="fas fa-heartbeat"></i></div>
-                            <h4><a href="">Transcript Verification Services</a></h4>
-                            <p>Transcript Verification Services</p>
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box" style="border: 2px solid #F59E0B47;">
+                            <div class="icon"><img src="assets/img/icon/sheild.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">High risk of fraud</a></h4>
+                            <p>
+                                No reliable way to detect <br />
+                                fake credentials
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box" style="border: 2px solid #E2E8F0;">
+                            <div class="icon"><img src="assets/img/icon/search.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">No transparency or tracking</a></h4>
+                            <p>
+                                You never know where your <br />
+                                verification stands
+                            </p>
                         </div>
                     </div>
 
@@ -163,113 +229,325 @@
             </div>
         </section>
 
-            <!-- End Services Section -->
-        
-        <!-- ======= Departments Section ======= -->
-        @* <section id="departments" class="departments">
+        <section id="services" class="services">
             <div class="container">
 
-                <div class="section-title">
-                    <h2>Departments</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <div class="section-title text-center">
+                    <h2>Verification Made Simple</h2>
+                    <p>
+                        Our streamlined process gets you verified on time
+                    </p>
                 </div>
 
-                <div class="row gy-4">
-                    <div class="col-lg-3">
-                        <ul class="nav nav-tabs flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Cardiology</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Neurology</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Hepatology</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Pediatrics</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Eye Care</a>
-                            </li>
-                        </ul>
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 76.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Submit Your Documents</a></h4>
+                            <p>
+                                Upload securely in minutes <br />
+                                with our encrypted platform
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-lg-9">
-                        <div class="tab-content">
-                            <div class="tab-pane active show" id="tab-1">
-                                <div class="row gy-4">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Cardiology</h3>
-                                        <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                                        <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
-                                    </div>
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 75.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">We Verify</a></h4>
+                            <p>
+                                Real-time progress tracking <br />
+                                with prompt status updates
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 77.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Get Results</a></h4>
+                            <p>
+                                Share digitally or download <br />
+                                instantly with verification badge
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="btn-get-starting mt-5">
+                    <a href="#" class="btn-get-started scrollto"><img src="assets/img/icon/Group 87.png" style="height:40px; width:40px;" alt="" class="img-fluid">Fast Verification Timeframe </a>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about" style="padding: 5% 5%;">
+            <div class="container-fluid">
+
+
+                <div class="section-title" style="text-align: left; padding-bottom:0px;">
+                    <h2 style="position: inherit; padding-bottom:0px;">Why choose CertiTrack </h2>
+                    <p style="font-weight:400; font-size:20px;">
+                        We've reimagined credential verification from the ground up
+                    </p>
+                </div>
+
+                <div class="row p-5">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="icon-box">
+                                    <div class="icon"><img src="assets/img/icon/Group 87.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                    <h4 class="title"><a href="">End-To-End Automation</a></h4>
+                                    <p class="description">
+                                        From submission to confirmation,
+                                        CertiTrack automates the
+                                        verification lifecycle—saving time,
+                                        reducing manual errors, and
+                                        improving operational efficiency
+                                    </p>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-2">
-                                <div class="row gy-4">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Et blanditiis nemo veritatis excepturi</h3>
-                                        <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                                        <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="assets/img/departments-2.jpg" alt="" class="img-fluid">
-                                    </div>
+                            <div class="col-sm-6">
+                                <div class="icon-box">
+                                    <div class="icon"><img src="assets/img/icon/Group 89.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                    <h4 class="title"><a href="">Bank Grade Security</a></h4>
+                                    <p class="description">
+                                        End-to-end encryption and
+                                        blockchain-ready infrastructure
+                                    </p>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-3">
-                                <div class="row gy-4">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                                        <p class="fst-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
-                                        <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="assets/img/departments-3.jpg" alt="" class="img-fluid">
-                                    </div>
+                            <div class="col-sm-6">
+                                <div class="icon-box">
+                                    <div class="icon"><img src="assets/img/icon/Group 88.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                    <h4 class="title"><a href="">Scalable and Secure</a></h4>
+                                    <p class="description">
+                                        Built with enterprise-grade security
+                                        and scalability, CertiTrack is
+                                        designed to handle the needs of
+                                        small organizations and large
+                                        institutions alike
+                                    </p>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-4">
-                                <div class="row gy-4">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                                        <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                                        <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="assets/img/departments-4.jpg" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab-5">
-                                <div class="row gy-4">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
-                                        <p class="fst-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
-                                        <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="assets/img/departments-5.jpg" alt="" class="img-fluid">
-                                    </div>
+                            <div class="col-sm-6">
+                                <div class="icon-box">
+                                    <div class="icon"><img src="assets/img/icon/Group 90.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                    <h4 class="title"><a href="">Real-Time Status Tracking</a></h4>
+                                    <p class="description">
+                                        Stay informed at every stage with
+                                        real-time status updates, audit trails,
+                                        and clear communication between
+                                        applicants and verifiers
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-6">
+                        <div class="row p-5" style="border: 1px solid #0C3256; border-radius:10px; margin: 10%;">
+                            <div class="icon-box mt-0">
+                                <div class="icon"><img src="assets/img/icon/Group 82.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                <h6 class="title"><a href="">99.8% Accuracy Rate</a></h6>
+                                <h6 class="description">
+                                    Industry leading verification
+                                </h6>
+                            </div>
+                            <div class="icon-box mt-2">
+                                <div class="icon"><img src="assets/img/icon/Group 83.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                <h4 class="title"><a href="">Global coverage</a></h4>
+                                <h6 class="description">
+                                    Global reach
+                                </h6>
+                            </div>
+                            <div class="icon-box mt-2">
+                                <div class="icon"><img src="assets/img/icon/Group 84.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                <h4 class="title"><a href="">Zero Fraud</a></h4>
+                                <h6 class="description">
+                                    Advanced detection algorithms
+                                </h6>
+                            </div>
+                            <div class="icon-box mt-2">
+                                <div class="icon"><img src="assets/img/icon/Group 85.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                                <h4 class="title"><a href="">No Data Retention</a></h4>
+                                <h6 class="description">
+                                    When no longer needed, your data will be securely deleted or anonymised.
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End About Section -->
+
+        <section id="services" class="services p-0">
+            <div class="container">
+
+                <div class="section-title text-center">
+                    <h2>Who We Work With </h2>
+                    <p>
+                        Trusted by institutions, employers, and individuals worldwide
+                    </p>
+                </div>
+
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-3 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 28.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Tertiary Institutions</a></h4>
+                            <p>
+                                Protect your reputation with <br /> instant, fraud-proof verification
+                            </p>
+                            <h6>
+                                Bulk verification processing <br />
+                                White-label solutions <br />
+                                API integration support
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 35.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Employers</a></h4>
+                            <p>
+                                Hire faster and with confidence <br /> using verified credentials
+                            </p>
+                            <h6>
+                                Background check integration <br />
+                                Team collaboration tools <br />
+                                Compliance reporting
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 42.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Professional Bodies </a></h4>
+                            <p>
+                                Maintain professional standards <br /> with verified certifications
+                            </p>
+                            <h6>
+                                Membership credential verification <br />
+                                Continuing education tracking <br />
+                                Professional license management
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 49.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Government Agencies / NGOs</a></h4>
+                            <p>
+                                Ensure public trust through secure, <br /> transparent verification
+                            </p>
+                            <h6>
+                                Regulatory compliance management <br />
+                                Licensed professional tracking <br />
+                                Security clearance support
+                            </h6>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
-        </section> *@<!-- End Departments Section -->
-        
+        </section>
+
+        <section id="services" class="services" style="padding: 5% 15%;">
+            <div class="container">
+
+                <div class="section-title text-center">
+                    <h2>Our Services </h2>
+                    <p@*  style="font-weight:400; font-size:22px;" *@>
+                        CertiTrack provides secure certificate and transcript verification services, handling <br /> requests, direct validation with issuing institutions, and submission of verified <br /> transcripts on behalf of holders to requesting organisations.
+                        </p>
+                </div>
+
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-6 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 59.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Certificate Verification</a></h4>
+                            <p>
+                                Certificate Verification Services
+                            </p>
+
+                            <div class="button-row text-center mt-4">
+                                <a href="#" class="certi scrollto"><img src="assets/img/icon/check.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">Verify Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box">
+                            <div class="icon"><img src="assets/img/icon/Group 56.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Transcript Verification</a></h4>
+                            <p>
+                                Transcript Verification Services
+                            </p>
+
+                            <div class="button-row text-center mt-4">
+                                <a href="#" class="certi scrollto"><img src="assets/img/icon/check.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">Verify Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about" class="about" style="padding: 5% 15%;">
+            <div class="container">
+
+                <div class="section-title text-center">
+                    <h2>See It In Action </h2>
+                    <p@*  style="font-weight:400; font-size:22px;" *@>
+                        Watch how CertiTrack transforms credential verification
+                        </p>
+                </div>
+
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-8 col-md-6 align-items-stretch mt-4 mt-md-0">
+
+                        <video controls style="max-width: 100%; height: auto; border-radius: 60px;">
+                            <source src="/video/CERTITRACK_VIDEO.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+
+                    <div class="button-row text-center mt-5">
+                        <a href="#" class="certi scrollto"><img src="assets/img/icon/check.png" style="height:20px; width:20px; margin-right:10px;" alt="" class="img-fluid">Verify Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="faq" class="faq section-bg">
             <div class="container">
 
                 <div class="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Find answers to the most commonly asked questions about our services, features, and processes. Whether you're a new user or need clarification on specific topics, our Frequently Asked Questions (FAQs) section is here to help you get quick and reliable information..</p>
+                    <h2>Frequently asked questions </h2>
+                    <p>
+                        Find answers to the most commonly asked questions <br />
+                        about our services, features, and processes.
+                    </p>
                 </div>
 
                 <div class="faq-list">
@@ -342,26 +620,77 @@
 
             </div>
         </section><!-- End Frequently Asked Questions Section -->
-        
+
+        <section class="services" style="padding: 5% 15%;">
+            <div class="container">
+
+                <div class="section-title text-center">
+                    <h2>Enterprise-Grade Security </h2>
+                    <p>
+                        Your data is protected by industry-leading security standards
+                    </p>
+                </div>
+
+                <div class="row justify-content-left">
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box" style="border: 2px solid #0C325699;">
+                            <div class="icon"><img src="assets/img/icon/Group 70.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Fraud Detection & Prevention</a></h4>
+                            <p>
+                                Advanced algorithms help
+                                detect red flags <br /> and
+                                anomalies, helping your
+                                organization <br /> avoid
+                                reputational and legal risks
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box" style="border: 2px solid #C19D5299;">
+                            <div class="icon"><img src="assets/img/icon/Group 72.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Seamless Integration</a></h4>
+                            <p style="text-align:left;">
+                                CertiTrack easily integrates
+                                with your <br /> existing HR,
+                                academic, or onboarding <br />
+                                systems—ensuring a
+                                smooth digital workflow
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 align-items-stretch mt-4 mt-md-0">
+                        <div class="icon-box" style="border: 2px solid #E2E8F0;">
+                            <div class="icon"><img src="assets/img/icon/Group 73.png" style="height:40px; width:40px;" alt="" class="img-fluid"></div>
+                            <h4><a href="">Dedicated Support</a></h4>
+                            <p>
+                                Enjoy access to a
+                                responsive support <br /> team
+                                that understands your
+                                needs <br /> and helps you get
+                                the most out <br /> of CertiTrack
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
+        <section id="contact" class="contact" style="padding: 5% 15% 0% 15%;">
             <div class="container">
 
                 <div class="section-title">
                     <h2>Contact</h2>
-                    @* <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> *@
+                    <p>Contact us for further questions</p>
                 </div>
             </div>
 
-            <div>
-                @* <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> 
-                <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.app.goo.gl/AZeu2t5nkPzgkDQ18" frameborder="0" allowfullscreen></iframe>*@
-               @*  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.35778829892!2d3.342479073975302!3d6.602382322243749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b922edda9ee83%3A0x2c22a24e471ee234!2s19%2F21%20Oritshe%20St%2C%20Omole%20Phase%201%2C%20Lagos%20101233%2C%20Lagos!5e0!3m2!1sen!2sng!4v1752151549622!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
-                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3963.7776175517647!2d3.32346847397493!3d6.549737822859968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s2%2F4%20Vincent%20Ezeh%20Street%2C%20Opposite%20Chivita%202nd%20Gate%2C%20Ajao%20Estate%2C%20Off%20Murtala%20Muhammed%20International%20Airport%20Road%2C%20Lagos.!5e0!3m2!1sen!2sng!4v1754135089750!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
             <div class="container">
-                <div class="row mt-5">
+                <div class="row mt-5 mb-4">
 
                     <div class="col-lg-4">
                         <div class="info">
@@ -419,6 +748,13 @@
                 </div>
 
             </div>
+
+            <div class="mt-5">
+                @* <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> 
+                <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.app.goo.gl/AZeu2t5nkPzgkDQ18" frameborder="0" allowfullscreen></iframe>*@
+                @*  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.35778829892!2d3.342479073975302!3d6.602382322243749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b922edda9ee83%3A0x2c22a24e471ee234!2s19%2F21%20Oritshe%20St%2C%20Omole%20Phase%201%2C%20Lagos%20101233%2C%20Lagos!5e0!3m2!1sen!2sng!4v1752151549622!5m2!1sen!2sng" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3963.7776175517647!2d3.32346847397493!3d6.549737822859968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s2%2F4%20Vincent%20Ezeh%20Street%2C%20Opposite%20Chivita%202nd%20Gate%2C%20Ajao%20Estate%2C%20Off%20Murtala%20Muhammed%20International%20Airport%20Road%2C%20Lagos.!5e0!3m2!1sen!2sng!4v1754135089750!5m2!1sen!2sng" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </section><!-- End Contact Section -->
 
     </main>
@@ -430,12 +766,11 @@
             @* <h1 class="logo me-auto text-center" style="font-size: 1.2rem;"> *@
             <h1 class="logo me-auto text-center mb-3" style="font-size: 1.5rem;">
                 <a href="/">
-                    <img src="/assets/img/Certti.jpg" style="height: 80px; width: 150px;" alt="Certitrack Logo" class="img-fluid">
+                    <img src="/assets/img/CerttiLogo.png" style="height:60px; width:180px;" alt="Certitrack Logo" class="img-fluid">
                 </a>
             </h1>
 
-            @* <h2 class="text-center mb-3">Start Onboarding</h2> *@
-            <h5 class="text-center">Begin Onboarding</h5>
+            <h3 class="mb-3">Begin Onboarding</h3>
 
             <input type="email" placeholder="Email" id="onboardingEmail" class="form-control mb-3" required />
 
@@ -447,7 +782,7 @@
                 <option value="">Loading organisation types...</option>
             </select>
 
-            <div class="d-flex justify-content-center gap-2">
+            <div class="d-flex justify-content-center gap-2 mb-4">
 
                 <button class="btn btn-primary me-2" onclick="submitOnboarding()">Submit</button>
                 <button class="btn btn-secondary" onclick="closeOnboardingModal()">Cancel</button>
@@ -458,7 +793,7 @@
 
 
 
-   @*  @section Scripts
+    @*  @section Scripts
     {
         <script>
 
@@ -474,7 +809,7 @@
 
             $(document).ready(function () {
                    // Open Modal
-               
+
 
                         // Load roles
             $.get('/Home/LoadRoles', function (data) {
@@ -604,7 +939,7 @@
     }
 
     }
-    
+
 </body>
 
 

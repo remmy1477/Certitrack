@@ -56,9 +56,9 @@
             <div class="widget widget-stats bg-teal">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-id-badge fa-fw"></i></div>
                 <div class="stats-content">
-                    <div class="stats-title">TOTAL CREDENTIAL REQUESTS</div>
+                    <div class="stats-title">TOTAL CERTIFICATE REQUESTS</div>
                     <div class="stats-number" id="totalCredentials">0</div>
-                    <div class="stats-desc">Up-to-date Credential Requests</div>
+                    <div class="stats-desc">Up-to-date Certificate Requests</div>
                 </div>
             </div>
         </div>
@@ -79,6 +79,39 @@
                     <div class="stats-title">PROCESSED REQUESTS</div>
                     <div class="stats-number" id="totalProcessed">0</div>
                     <div class="stats-desc">Successfully Processed Requests</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <div class="widget widget-stats bg-teal">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-id-badge fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">TOTAL CERTIFICATE PAYMENT</div>
+                    <div class="stats-number" id="totalCredentialPayments">0</div>
+                    <div class="stats-desc">Up-to-date Certificate Payment</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="widget widget-stats bg-blue">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">TOTAL TRANSCRIPT PAYMENT</div>
+                    <div class="stats-number" id="totalTranscriptPayments">0</div>
+                    <div class="stats-desc">Up-to-date Transcript Payment</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="widget widget-stats bg-indigo">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-check fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">TOTAL PAYMENT</div>
+                    <div class="stats-number" id="totalPayments">0</div>
+                    <div class="stats-desc">Total Payment</div>
                 </div>
             </div>
         </div>
@@ -159,6 +192,9 @@
                     $('#totalCredentials').text(data.totalCredentials);
                     $('#totalTranscripts').text(data.totalTranscriptRequests);
                     $('#totalProcessed').text(data.totalProcessedRequests);
+                    $('#totalCredentialPayments').text(data.totalCredentialPayments);
+                    $('#totalTranscriptPayments').text(data.totalTranscriptPayments);
+                    $('#totalPayments').text(data.totalPayments);
 
                     renderLineChart(data);
                     renderDoughnutChart(data);

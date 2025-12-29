@@ -1,0 +1,93 @@
+﻿/* ============================
+   Certitrack Theme Variables
+   Based on Figma Design System
+   ============================ */
+
+/* Fonts */
+:root {
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    /* Primary Colors */
+    --primary-gold: #C19D52;
+    --primary-navy: #0B3155;
+    /* Supporting */
+    --light-gold: #E8D2A9;
+    --dark-gold: #9A793C;
+    --soft-blue: #4A6D91;
+    --deep-navy: #071E34;
+    /* Neutral Colors */
+    --off-white: #F9F9F9;
+    --light-gray: #E5E5E5;
+    --mid-gray: #A1A1A1;
+    --charcoal: #333333;
+    --black: #000000;
+    /* Accent / Status */
+    --success: #1DB584;
+    --success-green: #4CAF50;
+    --warning: #F59E0B;
+    --error: #C0392B;
+    --info: #1ABC9C;
+    /* Bootstrap Overrides */
+    --primary: var(--primary-gold);
+    --secondary: var(--soft-blue);
+    --dark: var(--primary-navy);
+    --light: var(--off-white);
+}
+
+/* Typography */
+body {
+    font-family: var(--font-body);
+    color: var(--charcoal);
+    background-color: var(--off-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--primary-navy);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-gold);
+    border-color: var(--primary-gold);
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background-color: var(--dark-gold);
+        border-color: var(--dark-gold);
+    }
+
+.btn-secondary {
+    background-color: var(--soft-blue);
+    border-color: var(--soft-blue);
+    color: #fff;
+}
+
+    .btn-secondary:hover {
+        background-color: var(--primary-navy);
+        border-color: var(--primary-navy);
+    }
+
+/* Hero Section */
+.jumbotron {
+    background-color: var(--primary-navy);
+    color: var(--off-white);
+}
+
+/* Cards */
+.card {
+    border-radius: .5rem;
+    border: 1px solid var(--light-gray);
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+/* Footer */
+footer {
+    background-color: var(--deep-navy);
+    color: var(--off-white);
+}
